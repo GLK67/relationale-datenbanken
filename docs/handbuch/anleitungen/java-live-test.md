@@ -98,14 +98,14 @@ Im Codespace ist kein Display vorhanden – dafür bitte die lokale Java-Install
 - Java 17+ lokal installiert (z.B. via SDKMAN oder offizieller Installer)
 - Repository lokal geklont **oder** VS Code verbindet sich via Remote-Container mit X11-Forwarding
 
-### Schritt 1 – Kompilieren
+### Schritt 5 – Kompilieren
 
 ```bash
 mkdir -p build/java
 javac -d build/java src/volleyball/*.java
 ```
 
-### Schritt 2 – GUI starten
+### Schritt 6 – GUI starten
 
 ```bash
 java -cp build/java volleyball.MainWindow
@@ -192,5 +192,5 @@ src/volleyball/
 
 ---
 
-**Erstellt:** 26.03.2026  
+**Erstellt:** 26.03.2026
 **Zugehörige Skripte:** `scripts/test-java.sh`, `scripts/test-services.sh`

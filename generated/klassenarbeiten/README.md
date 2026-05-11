@@ -13,12 +13,19 @@ Dieses Verzeichnis enthält Musterklassenarbeiten und Templates für den Unterri
    - ✅ Gesamtpunkte aus Vorgaben hergeleitet: 34
    - ✅ Verteilung: 40% Modellierung, 40% Abfragen, 10% Theorie, 10% Struktogramm
 
-- **KA02_BG12_2025_60min_34P_EERM.mbw**
-   - EERM-Modellspezifikation fuer Workbench-orientierte Modellierung
+- **KA02_BG12_2025_60min_34P_EERM.mwb**
+   - EERM-Modellspezifikation Teil B (Lehrkraft-Referenz)
 
 - **KA02_BG12_2025_60min_34P_schema_data_dump.sql**
-   - Struktur- und Datendump fuer MySQL
-   - ✅ Parent-Tabellen mit ca. 20 Datensaetzen (`mitglieder`, `dozenten`)
+   - Struktur- und Datendump fuer Teil C (separater 3NF-Kontext: Stadtfahrradverleih)
+   - ✅ Parent-Tabellen mit ca. 20 Datensaetzen (`kunden`, `mitarbeitende`)
+
+- **KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb**
+   - EERM-Modellspezifikation fuer die SQL-Datenbank in Teil C
+   - Als Modellcontainer abgelegt; fuer native Designerbearbeitung in Workbench aus SQL-Dump ableiten oder aktualisieren
+
+- **KA02_BG12_2025_60min_34P_SQLDB_EERM.png** (optional)
+   - SQL-basiert gerenderte Referenzgrafik (oder exportierte Workbench-Grafik) fuer Unterrichtsmaterial
 
 ### Musterklassenarbeit (Online-Bücherverleih)
 
@@ -108,6 +115,10 @@ Dieses Verzeichnis enthält Musterklassenarbeiten und Templates für den Unterri
 - Lehrplan-konform (Baden-Württemberg)
 - Mit Musterlösungen und Bewertungsrichtlinien
 
+✅ **Didaktische Trennung**
+- Teil B (Modellierung) und Teil C (SQL-Abfragen) nutzen unterschiedliche Kontexte.
+- Dadurch wird keine Modellierungsloesung indirekt durch den SQL-Teil vorweggenommen.
+
 ---
 
 ## 🔄 Konvertierungs-Tools
@@ -155,5 +166,5 @@ Diese Klassenarbeiten basieren auf:
 
 ---
 
-**Erstellt:** 2025-05-09  
+**Erstellt:** 2025-05-09
 **Versio:** 1.0

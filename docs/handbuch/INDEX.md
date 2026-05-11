@@ -27,11 +27,15 @@
 ### 📐 Templates & Beispiele
 - **[templates/ROUTINE-TEMPLATE.md](templates/ROUTINE-TEMPLATE.md)** - Standard-Vorlage (MUSS gedacht werden!)
 - **[templates/beispiel-routine.md](templates/beispiel-routine.md)** - Dokumentiertes Beispiel
+- **[templates/KLASSENARBEIT-TEMPLATE-AUFGABEN-ARTEFAKTE-BPE6-BPE5.md](templates/KLASSENARBEIT-TEMPLATE-AUFGABEN-ARTEFAKTE-BPE6-BPE5.md)** - Schuelervorlage (nur Aufgabenstellung + Artefakte)
+- **[templates/KLASSENARBEIT-TEMPLATE-LOESUNG-ERWARTUNGSHORIZONT-BPE6-BPE5.md](templates/KLASSENARBEIT-TEMPLATE-LOESUNG-ERWARTUNGSHORIZONT-BPE6-BPE5.md)** - Lehrkraftvorlage (Loesung + Bewertung + Erwartungshorizont)
 
 ### 📚 Routinen-Katalog
 - **[routinen/kurzfristig/](routinen/kurzfristig/)** - Täglich/Wöchentlich (Kurzzeitaufgaben)
 - **[routinen/mittelfristig/](routinen/mittelfristig/)** - Monatlich/Quartalsweise (Mittelfristig)
 - **[routinen/langfristig/](routinen/langfristig/)** - Jährlich/Strategisch (Langfristig)
+- **[routinen/kurzfristig/KF-ROUTINE-008-separater-sql-3nf-kontext.md](routinen/kurzfristig/KF-ROUTINE-008-separater-sql-3nf-kontext.md)** - Pflicht bei Klassenarbeits-/Pruefungs-Generierung mit SQL-Teil
+- **[routinen/kurzfristig/KF-ROUTINE-009-eerm-png-generator.md](routinen/kurzfristig/KF-ROUTINE-009-eerm-png-generator.md)** - Generator fuer eingebettete Teil-C-Modellgrafik (.png)
 
 ---
 
@@ -214,19 +218,19 @@ handbuch/
 
 ## 🆘 Häufige Fragen
 
-**Q: Wo fange ich an?**  
+**Q: Wo fange ich an?**
 A: [README.md](README.md) lesen (5 Min Quick-Start)
 
-**Q: Wie erstelle ich eine neue Routine?**  
+**Q: Wie erstelle ich eine neue Routine?**
 A: [prozesse/neue-routine-erstellen.md](prozesse/neue-routine-erstellen.md)
 
-**Q: Was ist eine Redundanz?**  
+**Q: Was ist eine Redundanz?**
 A: Wenn zwei Routinen zu ähnlich sind. Lösung: [prozesse/redundanz-management.md](prozesse/redundanz-management.md)
 
-**Q: Darf ich alte Routinen löschen?**  
+**Q: Darf ich alte Routinen löschen?**
 A: Nein! Archivieren statt löschen. Siehe [prozesse/routine-aktualisieren.md](prozesse/routine-aktualisieren.md)
 
-**Q: Wie ist der Zeitplan?**  
+**Q: Wie ist der Zeitplan?**
 A: [marschplaene/HAUPTMARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)
 
 ---
@@ -239,8 +243,8 @@ A: [marschplaene/HAUPTMARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)
 
 ---
 
-**Version:** 1.0  
-**Erstellt:** 23.03.2026  
+**Version:** 1.0
+**Erstellt:** 23.03.2026
 **Status:** Live & Einsatzbereit
 
 **Start mit:** [README.md](README.md) ➜ [PFLICHTENHEFT.md](PFLICHTENHEFT.md) ➜ [ARCHITEKTUR.md](ARCHITEKTUR.md)

@@ -12,10 +12,10 @@ gewichtung:
 
 # Klassenarbeit: Relationale Datenbanken & Programmierung
 
-**Klasse/Kurs:** BG12  
-**Schuljahr:** 2024-2025  
-**Bearbeitungszeit:** 90 Minuten  
-**Erreichbare Punkte:** 30  
+**Klasse/Kurs:** BG12
+**Schuljahr:** 2024-2025
+**Bearbeitungszeit:** 90 Minuten
+**Erreichbare Punkte:** 30
 
 ---
 
@@ -26,13 +26,19 @@ gewichtung:
 - **Bei Datenbankaufgaben:** Geben Sie vollständige SQL-Anweisungen oder aussagekräftige Entwürfe an.
 - **Zeit-Management:** Verteilen Sie die Zeit entsprechend der Punktegrenzen (ca. 3 Minuten pro Punkt).
 
+## Hinweis für Lehrkräfte (Template-Regel)
+
+- Aufgaben zur Modellierung/Normalisierung und Aufgaben zu SQL-Abfragen sollen in unterschiedlichen Sachverhaltskontexten erstellt werden.
+- Für den SQL-Teil ist eine separate, bereits in 3NF normalisierte Datenbank als Arbeitsgrundlage bereitzustellen.
+- Für den SQL-Teil werden zusätzlich SQL-Dump und EERM-Artefakt abgelegt.
+
 ---
 
 # BPE 6: Relationale Datenbanken (27 Punkte / 90%)
 
 ## Aufgabe 1: Konzepte der Relationalen Datenbanken
 
-**Punkte: 3**  
+**Punkte: 3**
 **BPE:** 6 – Relationale Datenbanken / Grundkonzepte
 
 ### Problemstellung
@@ -49,16 +55,16 @@ Bewerten Sie die folgenden Aussagen zu Relationalen Datenbanken als **richtig (r
 
 ### Bewertung
 
-**3 Punkte:** Alle 5 Aussagen korrekt bewertet  
-**2 Punkte:** 4 Aussagen korrekt  
-**1 Punkt:** 3 Aussagen korrekt  
+**3 Punkte:** Alle 5 Aussagen korrekt bewertet
+**2 Punkte:** 4 Aussagen korrekt
+**1 Punkt:** 3 Aussagen korrekt
 **0 Punkte:** Weniger als 3 Aussagen korrekt
 
 ---
 
 ## Aufgabe 2: Datenbankmodellierung und Normalisierung
 
-**Punkte: 4**  
+**Punkte: 4**
 **BPE:** 6.3 – Normalisierung und Datenbankdesign
 
 ### Szenario
@@ -104,12 +110,12 @@ Die Hector-Kinderakademie verwaltet Förderkurse mit einem Datenbanksystem. **Bi
 
 ## Aufgabe 3: Datenbankabfragen – SQL SELECT
 
-**Punkte: 5**  
+**Punkte: 5**
 **BPE:** 6.4 – SQL-Abfragen (SELECT, WHERE, JOIN)
 
 ### Szenario
 
-Gegeben ist folgende Datenbankstruktur für die Hector-Kinderakademie:
+Gegeben ist folgende Datenbankstruktur für den SQL-Teil. Dieser Kontext soll sich vom Modellierungskontext in Aufgabe 2 unterscheiden:
 
 ```sql
 -- Tabelle: kinder
@@ -186,7 +192,7 @@ CREATE TABLE anmeldungen (
 
 ## Aufgabe 4: Fehleranalyse – Referentielle Integrität
 
-**Punkte: 6**  
+**Punkte: 6**
 **BPE:** 6.2 – Integrität und Constraints
 
 ### Szenario
@@ -194,8 +200,8 @@ CREATE TABLE anmeldungen (
 Ein Benutzer versucht, einen Datensatz aus der Tabelle `kinder` zu löschen und erhält folgende Fehlermeldung:
 
 ```
-Error: Cannot delete or update a parent row: a foreign key constraint fails 
-('hector_akademie.anmeldungen', CONSTRAINT 'fk_anmeldungen_kind' 
+Error: Cannot delete or update a parent row: a foreign key constraint fails
+('hector_akademie.anmeldungen', CONSTRAINT 'fk_anmeldungen_kind'
 FOREIGN KEY ('kind_id') REFERENCES 'kinder' ('kind_id'))
 ```
 
@@ -246,7 +252,7 @@ FOREIGN KEY ('kind_id') REFERENCES 'kinder' ('kind_id'))
 
 ## Aufgabe 5: Datenbankoptimierung – Indizes
 
-**Punkte: 9**  
+**Punkte: 9**
 **BPE:** 6.5 – Performance und Datenbankoptimierung
 
 ### Szenario
@@ -310,7 +316,7 @@ CREATE INDEX idx_materialien_kategorie_id ON materialien(kategorie_id);
 
 ## Aufgabe 6: Programmierung mit Benutzereingabe – Validierung
 
-**Punkte: 3**  
+**Punkte: 3**
 **BPE:** 5.1 – Programme mit Benutzereingabe/-ausgabe und Struktogramme
 
 ### Szenario
@@ -485,4 +491,3 @@ print(f"Sie haben {punkte} Punkte eingegeben.")
 | Version | Datum | Änderungen |
 |---------|-------|-----------|
 | 1.0 | 2025-05-09 | Template erstellt; BPE 6 (90%) + BPE 5.1 (10%) |
-

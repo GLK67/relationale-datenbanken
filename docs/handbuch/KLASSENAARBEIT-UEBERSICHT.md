@@ -4,13 +4,17 @@ wichtig: "Lesen Sie das KLASSENAARBEIT-HANDBUCH.md für die vollständige Anleit
 
 # 🎓 Klassenarbeits-Projekt: ABGESCHLOSSEN ✅
 
-**Fertigstellung:** 9. Mai 2025  
-**Fachbereich:** Informatik BG12 – Relationale Datenbanken (BPE 6) & Programmierung (BPE 5.1)  
+**Fertigstellung:** 9. Mai 2025
+**Fachbereich:** Informatik BG12 – Relationale Datenbanken (BPE 6) & Programmierung (BPE 5.1)
 **Qualitätsstatus:** ✅ Validiert & Formatiert
 
 ---
 
 ## 📊 ZUSAMMENFASSUNG: Was wurde erstellt?
+
+Didaktische Leitlinie (verbindlich):
+- Modellierung (Teil B) und SQL-Abfragen (Teil C) werden in unterschiedlichen Kontexten erstellt.
+- Teil C basiert auf einer separaten 3NF-Datenbank mit SQL-Dump und eigenem EERM-Artefakt.
 
 ```
 📦 Klassenarbeits-Paket
@@ -27,6 +31,9 @@ wichtig: "Lesen Sie das KLASSENAARBEIT-HANDBUCH.md für die vollständige Anleit
 │  └─ generated/klassenarbeiten/
 │     ├─ KA02_BG12_2024-2025_Muster_Online-Buecherverleih.md  (28,7 KB)
 │     ├─ KA02_BG12_2024-2025_Muster_Online-Buecherverleih.html (36,7 KB)
+│     ├─ KA02_BG12_2025_60min_34P_Muster_EERM_SQL.md
+│     ├─ KA02_BG12_2025_60min_34P_schema_data_dump.sql
+│     ├─ KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb
 │     └─ README.md
 │        (Komplettes Beispiel mit allen Lösungen)
 │        • Szenario: Online-Bücherverleih
@@ -151,9 +158,9 @@ python scripts/convert_ka_markdown.py
 - Best Practices
 
 ### Lokale Ressourcen
-✅ Klassenarrbeiten 2022-2025 (Archiv) – Historische Referenzen  
-✅ Lehrplan BW – BPE 6 & 5.1  
-✅ Operatorenliste-Struktogramme  
+✅ Klassenarrbeiten 2022-2025 (Archiv) – Historische Referenzen
+✅ Lehrplan BW – BPE 6 & 5.1
+✅ Operatorenliste-Struktogramme
 
 ---
 
@@ -259,11 +266,11 @@ edu-code-course-rdb/
 
 ## 🎉 CONCLUSION
 
-✅ **Template & Musterklassenarbeit** sind einsatzbereit  
-✅ **Dokumentation** ist vollständig  
-✅ **Validierung** erfolgreich durchgeführt  
-✅ **Export-Optionen** verfügbar (HTML, DOCX, PDF)  
-✅ **Best Practices** von Python-AuD-Repo integriert  
+✅ **Template & Musterklassenarbeit** sind einsatzbereit
+✅ **Dokumentation** ist vollständig
+✅ **Validierung** erfolgreich durchgeführt
+✅ **Export-Optionen** verfügbar (HTML, DOCX, PDF)
+✅ **Best Practices** von Python-AuD-Repo integriert
 
 **Nächste Schritte:**
 1. Handbuch lesen: [KLASSENAARBEIT-HANDBUCH.md](docs/handbuch/KLASSENAARBEIT-HANDBUCH.md)
@@ -273,7 +280,6 @@ edu-code-course-rdb/
 
 ---
 
-**Erstellt:** 9. Mai 2025  
-**Version:** 1.0  
+**Erstellt:** 9. Mai 2025
+**Version:** 1.0
 **Status:** ✅ Fertig & Getestet
-

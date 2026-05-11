@@ -1,7 +1,7 @@
 # ROUTINE-TEMPLATE: Standard-Vorlage
 
-**Dokumentversion:** 1.0  
-**Zweck:** Standard-Format für alle Lernroutinen  
+**Dokumentversion:** 1.0
+**Zweck:** Standard-Format für alle Lernroutinen
 **Diese Vorlage bei Bedarf anpassen, aber Struktur beibehalten!**
 
 ---

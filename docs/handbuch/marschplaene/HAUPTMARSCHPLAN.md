@@ -1,8 +1,8 @@
 # MARSCHPLAN: Lernroutinen-Wissensdatenbank
 
-**Dokumentversion:** 1.1  
-**Datum:** 25. März 2026  
-**Status:** Planmodus aktiv  
+**Dokumentversion:** 1.1
+**Datum:** 25. März 2026
+**Status:** Planmodus aktiv
 
 ---
 
@@ -38,7 +38,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 1.1.5 | ✅ README.md mit Quick-Start | DONE | 24.03 | 45 Min |
 | 1.1.6 | ✅ Verzeichnis-Index generieren | DONE | 24.03 | 30 Min |
 
-**Ziel-Datum:** 24.03.2026  
+**Ziel-Datum:** 24.03.2026
 **Aktueller Status:** 100% fertig
 
 ---
@@ -57,7 +57,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 1.2.4 | ⏳ Naming-Konventionen festlegen | TODO | 25.03 | 30 Min |
 | 1.2.5 | ⏳ Validierungs-Checkliste erstellen | TODO | 26.03 | 45 Min |
 
-**Ziel-Datum:** 26.03.2026  
+**Ziel-Datum:** 26.03.2026
 **Abhängigkeiten:** Milestone 1.1
 
 ---
@@ -76,7 +76,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 1.3.4 | ✅ review-prozess.md | DONE | 28.03 | 45 Min |
 | 1.3.5 | ⏳ governance-richtlinien.md | TODO | 29.03 | 1h |
 
-**Ziel-Datum:** 29.03.2026  
+**Ziel-Datum:** 29.03.2026
 **Abhängigkeiten:** Milestone 1.2
 
 ---
@@ -97,7 +97,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 2.1.4 | ⏳ KF-ROUTINE-004: Git Push & Commit | TODO | 02.04 | 30 Min |
 | 2.1.5 | ⏳ KF-ROUTINE-005: Fehlerbehandlung | TODO | 02.04 | 45 Min |
 
-**Ziel-Datum:** 02.04.2026  
+**Ziel-Datum:** 02.04.2026
 **Abhängigkeiten:** Milestone 1.3
 
 ---
@@ -114,7 +114,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 2.2.2 | ⏳ MF-ROUTINE-002: Sprint Planning | TODO | 03.04 | 45 Min |
 | 2.2.3 | ⏳ MF-ROUTINE-003: Dokumentation Update | TODO | 04.04 | 30 Min |
 
-**Ziel-Datum:** 04.04.2026  
+**Ziel-Datum:** 04.04.2026
 **Abhängigkeiten:** Milestone 1.3
 
 ---
@@ -130,7 +130,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 2.3.1 | ⏳ LF-ROUTINE-001: Jahresplanung | TODO | 05.04 | 1h |
 | 2.3.2 | ⏳ LF-ROUTINE-002: Architektur-Review | TODO | 05.04 | 1h |
 
-**Ziel-Datum:** 05.04.2026  
+**Ziel-Datum:** 05.04.2026
 **Abhängigkeiten:** Milestone 1.3
 
 ---
@@ -151,7 +151,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 3.1.4 | ⏳ Redundanzen eliminieren | TODO | 09.04 | 1.5h |
 | 3.1.5 | ⏳ Abhängigkeiten neu verknüpfen | TODO | 09.04 | 1h |
 
-**Ziel-Datum:** 09.04.2026  
+**Ziel-Datum:** 09.04.2026
 **Abhängigkeiten:** Milestone 2.1, 2.2, 2.3
 
 ---
@@ -169,7 +169,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 3.2.3 | ⏳ Automatische Redundanz-Checks | TODO | 11.04 | 1.5h |
 | 3.2.4 | ⏳ Index Auto-Generator | TODO | 11.04 | 1h |
 
-**Ziel-Datum:** 11.04.2026  
+**Ziel-Datum:** 11.04.2026
 **Abhängigkeiten:** Milestone 3.1
 
 ---
@@ -187,7 +187,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 3.3.3 | ⏳ Finalreview & QA | TODO | 13.04 | 1h |
 | 3.3.4 | ⏳ Release Notes vorbereiten | TODO | 13.04 | 45 Min |
 
-**Ziel-Datum:** 13.04.2026  
+**Ziel-Datum:** 13.04.2026
 **Abhängigkeiten:** Milestone 3.1, 3.2
 
 ---
@@ -208,7 +208,7 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 | 4.1.4 | ⏳ Backup & Recovery Check | TODO | Monatlich | 30 Min |
 | 4.1.5 | ⏳ Performance-Metriken tracken | TODO | Monatlich | 30 Min |
 
-**Ziel-Datum:** Für Phase 4 und darüber hinaus starten  
+**Ziel-Datum:** Für Phase 4 und darüber hinaus starten
 **Abhängigkeiten:** Alle vorigen Phasen
 
 ---
@@ -324,9 +324,9 @@ Eine vollständig dokumentierte, wartbare und erweiterbare Wissensdatenbank für
 
 ## 📞 Kontakt & Eskalation
 
-**Projektleiter:** Projektteam  
-**Review-Verantwortlicher:** Code Reviewer  
-**Eskalation:** Siehe PFLICHTENHEFT.md Kontakt-Sektion  
+**Projektleiter:** Projektteam
+**Review-Verantwortlicher:** Code Reviewer
+**Eskalation:** Siehe PFLICHTENHEFT.md Kontakt-Sektion
 
 ---
 

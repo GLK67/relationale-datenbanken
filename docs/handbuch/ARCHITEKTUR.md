@@ -1,7 +1,7 @@
 # ARCHITEKTUR: Lernroutinen-Wissensdatenbank
 
-**Dokumentversion:** 1.1  
-**Datum:** 25. März 2026  
+**Dokumentversion:** 1.1
+**Datum:** 25. März 2026
 
 ---
 
@@ -28,7 +28,7 @@ Jede Routine folgt diesem Format:
 # [ROUTINE-ID]: [NAME]
 
 ## Metadata
-- **ID:** ROUTINE-001  
+- **ID:** ROUTINE-001
 - **Kategorie:** kurzfristig/mittelfristig/langfristig
 - **Häufigkeit:** täglich/wöchentlich/monatlich/jährlich
 - **Zeitaufwand:** X Minuten/Stunden

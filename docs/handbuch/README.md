@@ -56,7 +56,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 - **[ARCHITEKTUR.md](ARCHITEKTUR.md)** - Wie das System funktioniert
 - **[MARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)** - Zeitplan & Meilenstones
 
-### 📋 Prozesse  
+### 📋 Prozesse
 - **[prozesse/neue-routine-erstellen.md](prozesse/neue-routine-erstellen.md)** - Anleitung neue Routine
 - **[prozesse/redundanz-management.md](prozesse/redundanz-management.md)** - Redundanzen eliminieren
 - **[prozesse/review-prozess.md](prozesse/review-prozess.md)** - Review & Genehmigung
@@ -146,7 +146,7 @@ Jede Routine hat:
 7. Nach Approval → Merge in main
 ```
 
-**Dauer:** ca. 2 Stunden  
+**Dauer:** ca. 2 Stunden
 **Unterstützung:** See "neue-routine-erstellen.md"
 
 ### Workflow 2: Redundanz gefunden?
@@ -161,7 +161,7 @@ Jede Routine hat:
 7. Merge & Publikation
 ```
 
-**Dauer:** ca. 1-3 Stunden  
+**Dauer:** ca. 1-3 Stunden
 **Unterstützung:** See "redundanz-management.md"
 
 ### Workflow 3: Routine aktualisieren
@@ -176,7 +176,7 @@ Jede Routine hat:
 7. Nach Approval → Merge & Auto-Publikation
 ```
 
-**Dauer:** ca. 1-2 Stunden  
+**Dauer:** ca. 1-2 Stunden
 **Unterstützung:** See "routine-aktualisieren.md"
 
 ---
@@ -270,16 +270,16 @@ Jede Routine hat:
 
 ## 📞 Support & Fragen
 
-**Fragen zu Routinen?**  
+**Fragen zu Routinen?**
 → Siehe FAQ oben oder konkrete Prozess-Dokumentation
 
-**Fragen zum System?**  
+**Fragen zum System?**
 → [ARCHITEKTUR.md](ARCHITEKTUR.md)
 
-**Fragen zu Prozessen?**  
+**Fragen zu Prozessen?**
 → [prozesse/](prozesse/) - Relevantes Dokument suchen
 
-**Fragen zu Zeitplan/Meilestones?**  
+**Fragen zu Zeitplan/Meilestones?**
 → [marschplaene/HAUPTMARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)
 
 **Direkter Kontakt:** [Team Lead / Process Owner]
@@ -322,8 +322,8 @@ Folge diese Schritte, um loszulegen:
 
 ---
 
-**Version:** 1.0  
-**Erstellt:** 23.03.2026  
-**Status:** Live & Einsatzbereit  
+**Version:** 1.0
+**Erstellt:** 23.03.2026
+**Status:** Live & Einsatzbereit
 
 **Viel Erfolg!** 🚀

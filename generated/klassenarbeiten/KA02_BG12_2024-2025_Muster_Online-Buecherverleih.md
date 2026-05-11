@@ -13,10 +13,10 @@ version: "1.0 (Muster)"
 
 # Muster-Klassenarbeit: Online-Bücherverleih
 
-**Klasse/Kurs:** BG12  
-**Schuljahr:** 2024-2025  
-**Bearbeitungszeit:** 90 Minuten  
-**Erreichbare Punkte:** 30  
+**Klasse/Kurs:** BG12
+**Schuljahr:** 2024-2025
+**Bearbeitungszeit:** 90 Minuten
+**Erreichbare Punkte:** 30
 
 > 📌 **Hinweis:** Diese Musterklassenarbeit zeigt die erwartete Struktur und Schwerpunkte. Sie kann als Vorlage für weitere Klassenarbeiten genutzt werden.
 
@@ -36,13 +36,13 @@ Bearbeiten Sie alle Aufgaben in der vorgegebenen Reihenfolge. Sie haben **90 Min
 
 ## Aufgabe 1: Grundkonzepte Relationale Datenbanken
 
-**Punkte: 3**  
-**BPE:** 6 – Grundkonzepte  
+**Punkte: 3**
+**BPE:** 6 – Grundkonzepte
 **Zeit:** ~5 Minuten
 
 ### Aufgabenstellung
 
-Eine Bücherei betreibt ein Datenbanksystem zur Verwaltung von Büchern, Mitarbeitern und Ausleihvorgängen. 
+Eine Bücherei betreibt ein Datenbanksystem zur Verwaltung von Büchern, Mitarbeitern und Ausleihvorgängen.
 
 Bewerten Sie die folgenden Aussagen zu Relationalen Datenbanken als **richtig (r)** oder **falsch (f)**:
 
@@ -75,8 +75,8 @@ Bewerten Sie die folgenden Aussagen zu Relationalen Datenbanken als **richtig (r
 
 ## Aufgabe 2: Datenbankdesign – Normalisierung
 
-**Punkte: 4**  
-**BPE:** 6.3 – Normalisierung  
+**Punkte: 4**
+**BPE:** 6.3 – Normalisierung
 **Zeit:** ~8 Minuten
 
 ### Szenario
@@ -109,7 +109,7 @@ Tabelle: Ausleihen
 
 **Musterlösung:**
 - **Antwort:** 1. Normalform (1NF) oder gar nicht normalisiert
-- **Begründung:** 
+- **Begründung:**
   - Alle Attribute sind atomar ✅
   - Aber: Partielle Abhängigkeiten vorhanden (buch_titel hängt nicht vollständig vom Primärschlüssel ab)
   - Transitive Abhängigkeiten möglich (Redundanzen)
@@ -181,8 +181,8 @@ Notwendige Tabellen:
 
 ## Aufgabe 3: SQL-Abfragen – SELECT, WHERE, JOIN
 
-**Punkte: 5**  
-**BPE:** 6.4 – SQL-Abfragen  
+**Punkte: 5**
+**BPE:** 6.4 – SQL-Abfragen
 **Zeit:** ~12 Minuten
 
 ### Datenbankschema
@@ -282,8 +282,8 @@ GROUP BY m.mitglied_id, m.name;
 
 ## Aufgabe 4: Fehleranalyse – Referentielle Integrität
 
-**Punkte: 6**  
-**BPE:** 6.2 – Datenintegrität  
+**Punkte: 6**
+**BPE:** 6.2 – Datenintegrität
 **Zeit:** ~10 Minuten
 
 ### Szenario
@@ -291,10 +291,10 @@ GROUP BY m.mitglied_id, m.name;
 Ein Nutzer versucht, ein Mitglied aus der Datenbank zu löschen und erhält folgende Fehlermeldung:
 
 ```
-Error Code: 1451. 
-Cannot delete or update a parent row: a foreign key constraint fails 
-(`buecher_verleih`.`ausleihvorgaenge`, 
-CONSTRAINT `fk_ausleihvorgaenge_mitglied` 
+Error Code: 1451.
+Cannot delete or update a parent row: a foreign key constraint fails
+(`buecher_verleih`.`ausleihvorgaenge`,
+CONSTRAINT `fk_ausleihvorgaenge_mitglied`
 FOREIGN KEY (`mitglied_id`) REFERENCES `mitglieder` (`mitglied_id`))
 ```
 
@@ -341,10 +341,10 @@ DELETE FROM mitglieder WHERE mitglied_id = 42;
 
 ```sql
 -- Constraint umgestellen:
-ALTER TABLE ausleihvorgaenge 
+ALTER TABLE ausleihvorgaenge
 DROP FOREIGN KEY fk_ausleihvorgaenge_mitglied;
 
-ALTER TABLE ausleihvorgaenge 
+ALTER TABLE ausleihvorgaenge
 ADD CONSTRAINT fk_ausleihvorgaenge_mitglied
 FOREIGN KEY (mitglied_id) REFERENCES mitglieder(mitglied_id)
 ON DELETE CASCADE;
@@ -405,8 +405,8 @@ SELECT * FROM mitglieder WHERE mitglied_id = 42;  -- Sollte leer sein
 
 ## Aufgabe 5: Datenbankoptimierung – Indizes
 
-**Punkte: 9**  
-**BPE:** 6.5 – Performance  
+**Punkte: 9**
+**BPE:** 6.5 – Performance
 **Zeit:** ~15 Minuten
 
 ### Szenario
@@ -444,7 +444,7 @@ SELECT * FROM ausleihvorgaenge WHERE mitglied_id = 1234;
 
 ```sql
 -- Index erstellen
-CREATE INDEX idx_ausleihvorgaenge_mitglied_id 
+CREATE INDEX idx_ausleihvorgaenge_mitglied_id
 ON ausleihvorgaenge(mitglied_id);
 ```
 
@@ -463,7 +463,7 @@ ON ausleihvorgaenge(mitglied_id);
 **Frage:** Die Bücherei nutzt häufig diese Abfrage:
 
 ```sql
-SELECT * FROM ausleihvorgaenge 
+SELECT * FROM ausleihvorgaenge
 WHERE mitglied_id = 1234 AND buch_id = 5;
 ```
 
@@ -479,7 +479,7 @@ Würde der Index aus Aufgabe b) für diese Abfrage reichen? Falls nein, wie wür
 
 ```sql
 -- Composite (Multi-Column) Index
-CREATE INDEX idx_ausleihvorgaenge_mitglied_buch 
+CREATE INDEX idx_ausleihvorgaenge_mitglied_buch
 ON ausleihvorgaenge(mitglied_id, buch_id);
 ```
 
@@ -539,8 +539,8 @@ ON ausleihvorgaenge(mitglied_id, buch_id);
 
 ## Aufgabe 6: Programmierung – Benutzereingabe & Validierung
 
-**Punkte: 3**  
-**BPE:** 5.1 – Programme mit I/O und Struktogramme  
+**Punkte: 3**
+**BPE:** 5.1 – Programme mit I/O und Struktogramme
 **Zeit:** ~15 Minuten
 
 ### Aufgabenstellung
@@ -641,7 +641,7 @@ valid = False
 
 while not valid:
     plz_eingabe = input("Geben Sie eine Postleitzahl (5 Ziffern) ein: ")
-    
+
     # Bedingungen prüfen
     if len(plz_eingabe) != 5:
         print("Fehler: Postleitzahl muss genau 5 Ziffern haben.")
@@ -666,7 +666,7 @@ valid = False
 
 while not valid:
     plz = input("PLZ (5 Ziffern): ")
-    
+
     # Alle Bedingungen in einer if-else prüfen
     if len(plz) == 5 and plz.isdigit() and plz[0] != '0':
         print(f"✓ {plz} ist gültig!")
@@ -720,10 +720,10 @@ Output: "✓ Postleitzahl gültig: 75001"
 
 ### Allgemeine Prinzipien
 
-✅ **Struktur vor Perfektionismus:** Handgezeichnete Struktogramme sind OK  
-✅ **Nachvollziehbarkeit:** Jeder Schritt muss lesbar sein  
-✅ **Logik vor Syntax:** Logikfehler −1 bis −2 Pkte; Syntaxfehler −0,25 bis −0,5 Pkte  
-✅ **Teilpunkte:** Nicht alles-oder-nichts vergeben (außer explizit markiert)  
+✅ **Struktur vor Perfektionismus:** Handgezeichnete Struktogramme sind OK
+✅ **Nachvollziehbarkeit:** Jeder Schritt muss lesbar sein
+✅ **Logik vor Syntax:** Logikfehler −1 bis −2 Pkte; Syntaxfehler −0,25 bis −0,5 Pkte
+✅ **Teilpunkte:** Nicht alles-oder-nichts vergeben (außer explizit markiert)
 
 ### Häufige Fehler und Punktabzug
 
@@ -792,4 +792,3 @@ CREATE TABLE ausleihvorgaenge (
 ---
 
 **Hinweis für die Nutzung:** Diese Musterklassenarbeit kann als Vorlage für weitere Klassenarbeiten genutzt werden. Ändern Sie das Szenario (z.B. andere Domäne wie "Hotelreservierungssystem", "Produktverwaltung"), behalten Sie aber die Struktur und Schwerpunkte (BPE 6: 90%, BPE 5.1: 10%) bei.
-

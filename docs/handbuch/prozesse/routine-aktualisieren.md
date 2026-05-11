@@ -1,8 +1,8 @@
 # PROZESS: Routine aktualisieren & Wartung
 
-**Dokumentversion:** 1.0  
-**Ziel:** Systematische Aktualisierung und Wartung bestehender Routinen  
-**Zielgruppe:** Dokumentatoren, Tech Leads, Process Owner  
+**Dokumentversion:** 1.0
+**Ziel:** Systematische Aktualisierung und Wartung bestehender Routinen
+**Zielgruppe:** Dokumentatoren, Tech Leads, Process Owner
 
 ---
 
@@ -38,10 +38,10 @@ Dieser Prozess regelt die **Aktualisierung und Wartung existierender Routinen** 
 ```
 Umfang klein (1-2 Sätze geändert)?
   ↓ Minor Update (v1.1)
-  
+
 Umfang mittel (mehrere Punkte/Schritte)?
   ↓ Major Update (v2.0)
-  
+
 Umfang groß (völlig neuer Prozess)?
   ↓ Major Update (v2.0) oder Neue Routine?
 ```
@@ -144,7 +144,7 @@ Minor Updates brauchen:
 
 **Für:** Größere Änderungen, neue Struktur, neue Anforderungen
 
-### Schritt 1: Änderung planen
+### Schritt 7: Änderung planen
 
 1. **Detaillierte Analyse:**
    ```
@@ -160,7 +160,7 @@ Minor Updates brauchen:
    - Müssen die auch updated werden?
    - Gibt es inkompatible Änderungen?
 
-### Schritt 2: Design-Document erstellen
+### Schritt 8: Design-Document erstellen
 
 Schreibe ein kurzes Design-Dokument:
 
@@ -186,7 +186,7 @@ Schreibe ein kurzes Design-Dokument:
 - Phase 3: v1.0 löschen
 ```
 
-### Schritt 3: Änderungen machen
+### Schritt 9: Änderungen machen
 
 ```bash
 git checkout -b routine/KF-ROUTINE-001-v2-redesign
@@ -198,7 +198,7 @@ git checkout -b routine/KF-ROUTINE-001-v2-redesign
 # etc.
 ```
 
-### Schritt 4: Update Versionsnummer & Changelog
+### Schritt 10: Update Versionsnummer & Changelog
 
 ```markdown
 ## Changelog
@@ -219,7 +219,7 @@ git checkout -b routine/KF-ROUTINE-001-v2-redesign
 [Wie gehen alte Benutzer über?]
 ```
 
-### Schritt 5: Git Commit & PR
+### Schritt 11: Git Commit & PR
 
 ```bash
 git commit -m "MAJOR UPDATE: KF-ROUTINE-001 → v2.0
@@ -232,7 +232,7 @@ git push origin routine/KF-ROUTINE-001-v2-redesign
 
 **Title:** `MAJOR UPDATE: KF-ROUTINE-001 v2.0 - [Redesign-Grund]`
 
-### Schritt 6: Review & Genehmigung
+### Schritt 12: Review & Genehmigung
 
 Major Updates brauchen:
 - ✅ Detailliertes Design-Review
@@ -247,19 +247,19 @@ Major Updates brauchen:
 
 **Für:** Routine ist nicht mehr aktuell, sollte nicht mehr verwendet werden
 
-### Schritt 1: Entscheiden
+### Schritt 13: Entscheiden
 
 ```
 Ist die Routine noch relevant?
   ├─ JA → Aktualisieren (Minor/Major)
   └─ NEIN → Archivieren
-  
+
 Gibt es Abhängigkeiten?
   ├─ JA → Erst Alternative finden/erstellen
   └─ NEIN → Löschen oder Archivieren
 ```
 
-### Schritt 2: Abhängigkeiten rerouten
+### Schritt 14: Abhängigkeiten rerouten
 
 ```
 1. Alle Routine finden, die referenzieren
@@ -267,14 +267,14 @@ Gibt es Abhängigkeiten?
 3. Reviews durchführen
 ```
 
-### Schritt 3: Archiviert-Status setzen
+### Schritt 15: Archiviert-Status setzen
 
 ```markdown
 ## ARCHIVIERT - Nicht mehr verwenden
 
-**Status:** 🔴 Archiviert (23.03.2026)  
-**Grund:** [Warum archiviert?]  
-**Alternative:** 🔗 [KF-ROUTINE-002: Neue Methode](link)  
+**Status:** 🔴 Archiviert (23.03.2026)
+**Grund:** [Warum archiviert?]
+**Alternative:** 🔗 [KF-ROUTINE-002: Neue Methode](link)
 **Letzte aktive Version:** v1.0 (15.03.2026)
 
 ---
@@ -285,7 +285,7 @@ Diese Routine ist nicht mehr aktuell. Bitte nutze stattdessen:
 → [KF-ROUTINE-002: Neue Methode](link)
 ```
 
-### Schritt 4: Datei behalten (nicht löschen!)
+### Schritt 16: Datei behalten (nicht löschen!)
 
 ```bash
 # Diese Datei NICHT löschen!
@@ -296,7 +296,7 @@ mv docs/handbuch/routinen/kurzfristig/KF-ROUTINE-001.md \
    docs/handbuch/routinen/archiv/KF-ROUTINE-001-ARCHIV.md
 ```
 
-### Schritt 5: Index updaten
+### Schritt 17: Index updaten
 
 ```bash
 # Aus Übersichten entfernen
@@ -309,17 +309,17 @@ mv docs/handbuch/routinen/kurzfristig/KF-ROUTINE-001.md \
 
 **Für:** Alte Routine wird durch neue Routine ersetzt
 
-### Schritt 1: Neue Routine erstellen
+### Schritt 18: Neue Routine erstellen
 
 Schaffe die bessere Version (KF-ROUTINE-002) zuerst.
 
-### Schritt 2: Alte Routine mit Deprecation-Notice
+### Schritt 19: Alte Routine mit Deprecation-Notice
 
 ```markdown
 ## ⚠️ DEPRECATED - Verwende stattdessen v2.0
 
-**Status:** 🟡 Deprecated (23.03.2026)  
-**Bis:** 30.06.2026 (veraltete Unterstützung bis daher)  
+**Status:** 🟡 Deprecated (23.03.2026)
+**Bis:** 30.06.2026 (veraltete Unterstützung bis daher)
 **Nachfolger:** 🔗 [KF-ROUTINE-002: New Method v2.0](link)
 
 ### Migration Guide
@@ -332,7 +332,7 @@ Alte Routine → Neue Routine:
 [Detaillierte Migrationsanleitung]
 ```
 
-### Schritt 3: Deprecation-Timeline
+### Schritt 20: Deprecation-Timeline
 
 **Phase 1: Ankündigung (Woche 1)**
 - Deprecation-Hinweis hinzufügen
@@ -410,10 +410,10 @@ Alte Routine → Neue Routine:
 
 ## 📞 Support & Fragen
 
-**Bei Fragen zum Update-Prozess:**  
+**Bei Fragen zum Update-Prozess:**
 → Frag deinen Tech-Lead oder review die [ARCHITEKTUR.md](../ARCHITEKTUR.md)
 
 ---
 
-**Version:** 1.0  
+**Version:** 1.0
 **Letzte Aktualisierung:** 23.03.2026

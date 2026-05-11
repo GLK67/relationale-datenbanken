@@ -1,6 +1,6 @@
 # BEISPIEL: KF-ROUTINE-001 - Tägliche Code-Review Vorbereitung
 
-**Dies ist ein dokumentiertes Beispiel einer kurztristigen Routine.**  
+**Dies ist ein dokumentiertes Beispiel einer kurztristigen Routine.**
 **Nutze dies als Referenz beim Erstellen eigener Routinen!**
 
 ---
@@ -132,10 +132,10 @@ Diese Routine bereitet den Arbeitstag vor durch Überprüfung offener Code-Revie
      DRINGEND:
      1. PR-123 (Team-Member blockiert!)
      2. PR-124 (Critical-Bug-Fix)
-     
+
      HEUTE:
      3. PR-125 (Feature-Implementation)
-     
+
      DIESE WOCHE:
      4. PR-126 (Code-Cleanup)
      ```
@@ -237,16 +237,16 @@ Diese Routine bereitet den Arbeitstag vor durch Überprüfung offener Code-Revie
 ## 📌 Warum dieses Beispiel?
 
 Dieses Beispiel zeigt:
-✅ Wie ein Template **konkret** ausgefüllt wird  
-✅ Pradktische Schritte statt abstrakter Beschreibung  
-✅ Fehlerbehandlung im echten Leben  
-✅ Konkrete Erfolgskriterien & Metriken  
-✅ Verknüpfungen zu anderen Routinen  
+✅ Wie ein Template **konkret** ausgefüllt wird
+✅ Pradktische Schritte statt abstrakter Beschreibung
+✅ Fehlerbehandlung im echten Leben
+✅ Konkrete Erfolgskriterien & Metriken
+✅ Verknüpfungen zu anderen Routinen
 
 **Nutze dies als Template für deine neuen Routinen!**
 
 ---
 
-**Version Beispiel:** 1.0  
-**Zweck:** Documental Reference  
+**Version Beispiel:** 1.0
+**Zweck:** Documental Reference
 **Bitte nicht ändern** (Vorlage aus Templates)

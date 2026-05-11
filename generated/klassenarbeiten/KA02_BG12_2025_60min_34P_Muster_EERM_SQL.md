@@ -9,6 +9,11 @@ verteilung:
   abfragen_mehrtabellen: 14
   theorie_mc: 3
   struktogramm: 3
+artefakte:
+  modellierung_eerm_lehrkraft: "KA02_BG12_2025_60min_34P_EERM.mwb"
+  sql_db_dump: "KA02_BG12_2025_60min_34P_schema_data_dump.sql"
+  sql_db_eerm: "KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb"
+  sql_db_eerm_grafik: "KA02_BG12_2025_60min_34P_SQLDB_EERM.png"
 ---
 
 # Musterklassenarbeit (60 Minuten)
@@ -48,10 +53,13 @@ Markieren Sie richtig/falsch. (0,5 Punkte je Aussage)
 
 ## Teil B (14 Punkte): EERM in MySQL Workbench
 
-Nutzen Sie das bereitgestellte Datenmodell der Kursplattform.
+Wichtig didaktisch:
+- Teil B ist eine reine Modellierungsaufgabe.
+- Es wird bewusst kein fertiges SQL-Schema vorgegeben.
+- Die Struktur muss von den Schülerinnen und Schülern selbst aus dem Sachverhalt entwickelt werden.
 
 ### Aufgabe 3.1: EERM modellieren – 8 Punkte
-Sachverhalt:
+Sachverhalt Modellierung (Kontext 1):
 Eine Bildungseinrichtung betreibt eine Kursplattform. Teilnehmende buchen Kurse zu konkreten Terminen. Lehrkräfte betreuen Kurse, zum Teil im Team. Die Schulleitung benötigt später Auswertungen zu Buchungen pro Person, Terminen pro Kurs und Lehrkräften ohne aktive Zuordnung.
 
 Auftrag:
@@ -69,20 +77,33 @@ Nennen Sie je ein Beispiel:
 
 ## Teil C (14 Punkte): SQL-Abfragen über viele Tabellen
 
-Grundlage: SQL-Dump im selben Verzeichnis.
+Separater SQL-Kontext (3NF, Kontext 2):
+Für Teil C wird absichtlich ein anderen Kontext als in Teil B verwendet, damit die Modellierungsloesung aus Teil B nicht indirekt vorgegeben wird.
+
+Konkreter Sachverhalt:
+Ein kommunaler Stadtfahrradverleih verwaltet Kundinnen und Kunden, Stationen, Fahrradtypen, einzelne Fahrräder, Ausleihen, Zahlungen und Wartungen. Die bereitgestellte Übungsdatenbank ist bereits in 3NF modelliert.
+
+Arbeitsgrundlage:
+- SQL-Dump: KA02_BG12_2025_60min_34P_schema_data_dump.sql
+- EERM-Datei (Lehrkraft/Qualitätssicherung): KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb
+- Workbench-Grafik (falls vorhanden): KA02_BG12_2025_60min_34P_SQLDB_EERM.png
 
 ### Aufgabe 4.1 (4 Punkte)
-Geben Sie für jedes Mitglied alle gebuchten Kurse mit Dozentenname und Termin (Datum) aus.
-Sortierung: Mitglied, Datum.
+Geben Sie für jede abgeschlossene Ausleihe den Kundennamen, die Fahrradnummer, den Fahrradtyp, Start- und Zielstation sowie den Zahlbetrag aus.
+Sortierung: Kundennachname, Startzeit.
 
 ### Aufgabe 4.2 (4 Punkte)
-Ermitteln Sie je Mitglied die Anzahl Buchungen. Zeigen Sie nur Mitglieder mit mindestens 2 Buchungen.
+Ermitteln Sie je Kundin/Kunde die Anzahl abgeschlossener Ausleihen. Zeigen Sie nur Personen mit mindestens 2 abgeschlossenen Ausleihen.
 
 ### Aufgabe 4.3 (3 Punkte)
-Geben Sie pro Kurs den letzten Termin und die Anzahl angemeldeter Mitglieder aus.
+Geben Sie pro Station den letzten Ausleihstart und die Anzahl unterschiedlicher Kundinnen/Kunden aus, die dort gestartet sind.
 
 ### Aufgabe 4.4 (3 Punkte)
-Finden Sie Dozenten ohne Kurszuordnung (LEFT JOIN).
+Finden Sie Mitarbeitende ohne dokumentierte Wartung (LEFT JOIN).
+
+## Modellgrafik Teil C
+
+![EERM Teil C - separater SQL-Kontext](./KA02_BG12_2025_60min_34P_SQLDB_EERM.png)
 
 ## Teil D (3 Punkte): Grundlagen Programmierung
 
@@ -104,10 +125,17 @@ Bewertung:
 
 ## Abgabe
 
-- EERM-Datei: KA02_BG12_2025_60min_34P_EERM.mbw
-- SQL-Dump: KA02_BG12_2025_60min_34P_schema_data_dump.sql
+- EERM-Modellierung Teil B (von Schülerinnen und Schülern erstellt): KA02_BG12_2025_60min_34P_EERM_SCHUELER.mwb
+- SQL-Dump Teil C: KA02_BG12_2025_60min_34P_schema_data_dump.sql
+- EERM SQL-Kontext Teil C (Lehrkraft): KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb
 - SQL-Loesungen als Datei oder Text
 
 ## Kurzloesungsschluessel (Lehrkraft)
 
 Aufgabe 1: r, f, r, r, f, r
+
+Beispiellogik für Teil C:
+- 4.1 benötigt JOIN über mindestens: ausleihen, kunden, fahrraeder, fahrradtypen, stationen, zahlungen
+- 4.2 benötigt GROUP BY/HAVING auf kunden + ausleihen
+- 4.3 benötigt Aggregation pro station + MAX(startzeit)
+- 4.4 benötigt LEFT JOIN mitarbeitende -> wartungen und IS NULL

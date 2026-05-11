@@ -1,9 +1,9 @@
 # PFLICHTENHEFT: Lernroutinen-Wissensdatenbank
 
-**Dokumentversion:** 1.0  
-**Datum:** 23. März 2026  
-**Status:** In Bearbeitung  
-**Letzter Autor:** System-Setup  
+**Dokumentversion:** 1.0
+**Datum:** 23. März 2026
+**Status:** In Bearbeitung
+**Letzter Autor:** System-Setup
 
 ---
 
@@ -232,7 +232,7 @@ Git Commit & Push
 
 ---
 
-**Kontakt & Support:**  
+**Kontakt & Support:**
 Für Fragen zur Wissensdatenbank: Siehe MARSCHPLAN.md und prozesse/neue-routine-erstellen.md
 
 **Version History:**

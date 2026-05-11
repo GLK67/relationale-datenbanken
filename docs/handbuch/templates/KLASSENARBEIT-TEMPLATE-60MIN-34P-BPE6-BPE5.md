@@ -24,8 +24,10 @@ gewichtung:
 - Gesamtpunkte: 34
 - Tool-Hinweis: Modellierung als EERM in MySQL Workbench
 - Abgabe-Artefakte:
-  - EERM-Modell als .mbw (schulinterner Standard)
-  - Struktur- und Datendump als .sql
+  - EERM-Modell Teil B als .mwb (von Schuelerinnen und Schuelern erstellt)
+  - Struktur- und Datendump Teil C als .sql (separater Kontext)
+  - EERM Teil C als .mwb (Lehrkraft-Referenz)
+  - EERM-Grafik Teil C als .png (wenn aus Workbench exportiert)
 
 ## Punkteverteilung
 
@@ -48,7 +50,12 @@ gewichtung:
 ### Teil B: EERM + Normalisierung + Anomalien (14 Punkte, 25 Minuten)
 
 #### Aufgabe 3: EERM in MySQL Workbench
-Sachverhalt: Eine Kursplattform verwaltet Teilnehmende, Lehrkräfte, Kursangebote, Kursdurchführungen und Buchungen. Ein Kurs kann von mehreren Lehrkräften betreut werden, Lehrkräfte können mehrere Kurse übernehmen. Auswertungen sollen später beantworten, wer wann welchen Kurs gebucht hat und welche Lehrkräfte ohne Zuordnung bleiben.
+Didaktikregel:
+- In Teil B wird kein fertiges SQL-Schema vorgegeben.
+- Die Lernenden sollen das Datenmodell selbst entwickeln.
+
+Sachverhalt Modellierung (Kontext 1):
+Eine Kursplattform verwaltet Teilnehmende, Lehrkräfte, Kursangebote, Kursdurchführungen und Buchungen. Ein Kurs kann von mehreren Lehrkräften betreut werden, Lehrkräfte können mehrere Kurse übernehmen. Auswertungen sollen später beantworten, wer wann welchen Kurs gebucht hat und welche Lehrkräfte ohne Zuordnung bleiben.
 
 - b1) EERM erstellen (8 Punkte)
   - Leiten Sie ein konsistentes EERM aus dem Sachverhalt ab und modellieren Sie es in MySQL Workbench.
@@ -60,7 +67,14 @@ Sachverhalt: Eine Kursplattform verwaltet Teilnehmende, Lehrkräfte, Kursangebot
 ### Teil C: SQL-Abfragen über viele Tabellen (14 Punkte, 25 Minuten)
 
 #### Aufgabe 4: Mehrtabellenabfragen
-Arbeitsgrundlage: bereitgestellter SQL-Dump.
+Didaktikregel:
+- Teil C muss immer einen anderen Domänenkontext als Teil B verwenden.
+- Die SQL-Datenbank für Teil C ist bereits in 3NF bereitgestellt.
+
+Arbeitsgrundlage Teil C:
+- bereitgestellter SQL-Dump
+- separates EERM (Lehrkraft)
+- optional Workbench-Grafik mit Notation "Connect to columns"
 
 - c1) JOIN über 4 Tabellen mit Filter und Sortierung (4 Punkte)
 - c2) Aggregation pro Elternentitaet mit GROUP BY/HAVING (4 Punkte)
@@ -80,12 +94,14 @@ Arbeitsgrundlage: bereitgestellter SQL-Dump.
 
 ## Abgabeformat
 
-1. Datei: KAxx_..._EERM.mbw
-2. Datei: KAxx_..._schema_data_dump.sql
-3. SQL-Loesungen als Text oder .sql
+1. Datei: KAxx_..._EERM_SCHUELER.mwb (Teil B)
+2. Datei: KAxx_..._schema_data_dump.sql (Teil C, separater Kontext)
+3. Datei: KAxx_..._SQLDB_EERM.mwb (Lehrkraft-Referenz Teil C)
+4. Datei: KAxx_..._SQLDB_EERM.png (wenn aus Workbench exportiert)
+5. SQL-Loesungen als Text oder .sql
 
 ## Hinweise für Lehrkraft
 
 - Parent-Tabellen im Dump mit ca. 20 Datensaetzen (z. B. mitglieder, dozenten).
 - Aufgabenstellung knapp halten; Fokus auf Kernkompetenzen.
-- In Workbench: EERM visuell prüfen (PK/FK, Kardinalitäten, N:M).
+- In Workbench: Modell-Notation auf "Connect to columns" setzen und Grafik exportieren.

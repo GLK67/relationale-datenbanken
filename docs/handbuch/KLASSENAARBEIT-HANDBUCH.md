@@ -1,7 +1,7 @@
 # Handbuch: Klassenarbeiten-Template & Musterklassenarbeit
 
-**Erstellt:** 2025-05-09  
-**Version:** 1.0  
+**Erstellt:** 2025-05-09
+**Version:** 1.0
 **Fachbereich:** Informatik BG12 – Relationale Datenbanken (BPE 6) + Programmierung (BPE 5.1)
 
 ---
@@ -24,20 +24,31 @@ Dieses Handbuch erklärt:
 - **Punkteherleitung:** `120 * (60/210) = 34,29` -> gerundet **34 Punkte**
 - **Gewichtung:**
    - 40% Modellierung/Normalisierung/Anomalien = 14 Punkte
-   - 40% SQL-Abfragen ueber viele Tabellen = 14 Punkte
+   - 40% SQL-Abfragen ueber viele Tabellen (separater 3NF-Kontext) = 14 Punkte
    - 10% Theorie (MC) = 3 Punkte
    - 10% Struktogramm = 3 Punkte
 
+### Zwei-Template-Vorgabe (verbindlich)
+- **Schuelervorlage (nur Aufgaben + Artefakt-Hinweise):** [docs/handbuch/templates/KLASSENARBEIT-TEMPLATE-AUFGABEN-ARTEFAKTE-BPE6-BPE5.md](templates/KLASSENARBEIT-TEMPLATE-AUFGABEN-ARTEFAKTE-BPE6-BPE5.md)
+- **Lehrkraftvorlage (Loesungen + Bewertung + Erwartungshorizont):** [docs/handbuch/templates/KLASSENARBEIT-TEMPLATE-LOESUNG-ERWARTUNGSHORIZONT-BPE6-BPE5.md](templates/KLASSENARBEIT-TEMPLATE-LOESUNG-ERWARTUNGSHORIZONT-BPE6-BPE5.md)
+- **Generator-Plugin fuer Modellgrafik (.png):** [scripts/plugins/eerm_grafik_generator/generate_eerm_png.py](../../scripts/plugins/eerm_grafik_generator/generate_eerm_png.py)
+
 ### 60-Minuten-Muster inkl. Datenartefakte
 - **Pruefungsdatei:** [generated/klassenarbeiten/KA02_BG12_2025_60min_34P_Muster_EERM_SQL.md](../generated/klassenarbeiten/KA02_BG12_2025_60min_34P_Muster_EERM_SQL.md)
-- **EERM-Datei (.mbw):** [generated/klassenarbeiten/KA02_BG12_2025_60min_34P_EERM.mbw](../generated/klassenarbeiten/KA02_BG12_2025_60min_34P_EERM.mbw)
-- **Struktur- und Datendump (.sql):** [generated/klassenarbeiten/KA02_BG12_2025_60min_34P_schema_data_dump.sql](../generated/klassenarbeiten/KA02_BG12_2025_60min_34P_schema_data_dump.sql)
+- **EERM Teil B (Lehrkraft-Referenz, .mwb):** [generated/klassenarbeiten/KA02_BG12_2025_60min_34P_EERM.mwb](../generated/klassenarbeiten/KA02_BG12_2025_60min_34P_EERM.mwb)
+- **Struktur- und Datendump Teil C (.sql):** [generated/klassenarbeiten/KA02_BG12_2025_60min_34P_schema_data_dump.sql](../generated/klassenarbeiten/KA02_BG12_2025_60min_34P_schema_data_dump.sql)
+- **EERM Teil C (separate SQL-Datenbank, .mwb):** [generated/klassenarbeiten/KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb](../generated/klassenarbeiten/KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb)
+- **EERM-Grafik Teil C (.png, Workbench-Export oder SQL-basiert gerendert):** `generated/klassenarbeiten/KA02_BG12_2025_60min_34P_SQLDB_EERM.png`
 - **Datentiefe:** Parent-Tabellen enthalten ca. 20 Datensaetze.
+
+Didaktikregel:
+- Teil B (Modellierung) und Teil C (SQL-Abfragen) nutzen unterschiedliche Kontexte.
+- Dadurch wird keine Modellierungsloesung indirekt ueber Teil C vorweggenommen.
 
 ### Template-Datei
 - **Pfad:** [docs/handbuch/templates/KLASSENAARBEIT-TEMPLATE-BPE6-BPE5.md](../../templates/KLASSENAARBEIT-TEMPLATE-BPE6-BPE5.md)
 - **Format:** Markdown (.md)
-- **Inhalt:** 
+- **Inhalt:**
   - Struktur mit Platzhaltern
   - Vollständige Aufgaben-Vorlage
   - Bewertungsrichtlinien
@@ -61,9 +72,13 @@ Dieses Handbuch erklärt:
 ### Schritt 1: Template kopieren
 
 ```bash
-# Kopieren Sie das Template als Basis
-cp docs/handbuch/templates/KLASSENAARBEIT-TEMPLATE-BPE6-BPE5.md \
-   generated/klassenarbeiten/KA02_BG12_[SCHULJAHR]_NEU_[SZENARIO].md
+# Schuelervorlage (nur Aufgabenstellung)
+cp docs/handbuch/templates/KLASSENARBEIT-TEMPLATE-AUFGABEN-ARTEFAKTE-BPE6-BPE5.md \
+   generated/klassenarbeiten/KAxx_BG12_[SCHULJAHR]_AUFGABEN_[SZENARIO].md
+
+# Lehrkraftvorlage (Loesungen + Erwartungshorizont)
+cp docs/handbuch/templates/KLASSENARBEIT-TEMPLATE-LOESUNG-ERWARTUNGSHORIZONT-BPE6-BPE5.md \
+   generated/klassenarbeiten/KAxx_BG12_[SCHULJAHR]_LOESUNG_[SZENARIO].md
 ```
 
 ### Schritt 2: Frontmatter aktualisieren
@@ -98,9 +113,16 @@ erreichbare_punkte: 30
 - Behalten Sie die BPE 6 / BPE 5.1 Verteilung (90% / 10%)
 - Erneuern Sie einzelne Aufgaben (z.B. nur Aufgabe 3)
 
-### Schritt 4: Lösungen einfügen
+### Schritt 4: Loesungen und Erwartungshorizont eintragen
 
-Suchen Sie nach `**Musterlösung:**` und `**Ihre Lösung:**` und füllen Sie ein:
+Pflegen Sie die Lehrkraftvorlage mit:
+
+- Musterloesungen je Aufgabenteil
+- Erwartungshorizont
+- Bewertungsraster und Teilpunkte
+- typische Fehlleistungen
+
+Suchen Sie nach `Musterloesung` und `Erwartungshorizont` und fuellen Sie die Abschnitte aus:
 
 ```markdown
 ### Aufgabenteile
@@ -109,19 +131,45 @@ Suchen Sie nach `**Musterlösung:**` und `**Ihre Lösung:**` und füllen Sie ein
 
 **Frage:** [Ihre Frage]
 
-**Musterlösung:**
+**Musterloesung:**
 
-[Fügen Sie die Lösung hier ein]
+[Fuegen Sie die Loesung hier ein]
 ```
 
-### Schritt 5: Konvertierung durchführen
+### Schritt 5: Modellgrafik fuer Teil C erzeugen (falls noetig)
+
+```bash
+# Ein-Befehl-Workflow (empfohlen): erzeugen + einbetten
+bash scripts/generate-ka-eerm-assets.sh
+```
+
+Alternativ manuell:
+
+```bash
+# Erzeugt fehlende *_SQLDB_EERM.png aus vorhandenen *_SQLDB_EERM.mwb
+python3 scripts/plugins/eerm_grafik_generator/generate_eerm_png.py \
+   --input-dir generated/klassenarbeiten
+```
+
+Hinweis:
+- Der Generator rendert die PNG aus dem SQL-Dump (Tabellen + FK-Beziehungen).
+- Die native Designerbearbeitung erfolgt weiterhin ueber die `.mwb`-Datei in MySQL Workbench.
+
+### Schritt 5a: PNG-Referenz in generierte Markdown-Datei einbetten
+
+```bash
+python3 scripts/plugins/eerm_grafik_generator/embed_eerm_png_reference.py \
+   --markdown-dir generated/klassenarbeiten
+```
+
+### Schritt 6: Konvertierung durchfuehren
 
 ```bash
 # Validierung und HTML-Konvertierung
 python /workspaces/edu-code-course-rdb/scripts/convert_ka_markdown.py
 ```
 
-### Schritt 6: Qualitätskontrolle
+### Schritt 7: Qualitätskontrolle
 
 **Checkliste:**
 
@@ -130,6 +178,10 @@ python /workspaces/edu-code-course-rdb/scripts/convert_ka_markdown.py
 - [ ] Zeitaufwand pro Aufgabe notiert (~5-15 min)
 - [ ] Mindestens eine Musterlösung pro Aufgabe
 - [ ] EERM im Diagramm vorhanden
+- [ ] Teil B und Teil C verwenden unterschiedliche Kontexte
+- [ ] SQL-Dump Teil C ist in 3NF und von Teil B entkoppelt
+- [ ] Workbench-Grafik fuer Teil C (Notation: Connect to columns) exportiert, falls Workbench verfuegbar
+- [ ] Falls kein Workbench-Export: PNG mit Generator-Plugin erstellt
 - [ ] SQL-Beispiele syntaktisch korrekt
 - [ ] Python-Code testbar
 - [ ] Struktogramm logisch geschlossen
@@ -324,4 +376,3 @@ Bei Fragen oder Verbesserungsvorschlägen:
 | Version | Datum | Änderungen |
 |---------|-------|-----------|
 | 1.0 | 2025-05-09 | Handbuch erstellt; Template & Musterklassenarbeit |
-

@@ -10,6 +10,12 @@ note_fail() {
 
 echo "[docs] Starte Dokumentationsvalidierung..."
 
+if ! python3 scripts/optimize_docs.py --check; then
+  echo "[docs] FAIL: Dokumentation ist nicht wohlgeformt oder strukturell inkonsistent"
+  echo "[docs] HINT: bash scripts/optimize-docs.sh"
+  exit 1
+fi
+
 required_files=(
   "docs/handbuch/INDEX.md"
   "docs/handbuch/PFLICHTENHEFT.md"
@@ -61,6 +67,11 @@ fi
 
 if [[ $fail -ne 0 ]]; then
   echo "[docs] Dokumentationsvalidierung fehlgeschlagen"
+  exit 1
+fi
+
+if ! bash scripts/validate-ka-separate-context.sh; then
+  echo "[docs] FAIL: Klassenarbeits-Kontexttrennung fehlgeschlagen"
   exit 1
 fi
 

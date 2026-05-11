@@ -1,8 +1,8 @@
 # PROZESS: Redundanz-Management
 
-**Dokumentversion:** 1.0  
-**Ziel:** Systematische Erkennung und Elimination von Redundanzen  
-**Zielgruppe:** Prozess-Manager, Reviewers, Architekten  
+**Dokumentversion:** 1.0
+**Ziel:** Systematische Erkennung und Elimination von Redundanzen
+**Zielgruppe:** Prozess-Manager, Reviewers, Architekten
 
 ---
 
@@ -208,7 +208,7 @@ findings:
     severity: "KRITISCH"
     recommendation: "ROUTINE-005 löschen"
     status: "zu_prüfen"
-    
+
   - id: RED-002
     routine_a: "MF-ROUTINE-001"
     routine_b: "MF-ROUTINE-003"
@@ -269,7 +269,7 @@ Grund: 95% Redundanz mit ROUTINE-YYY identifiziert
 
 Auswirkung: Wenn Sie ROUTINE-XXX verwendet haben, nutzen Sie ab sofort ROUTINE-YYY
 
-Migrationshilfe: 
+Migrationshilfe:
 - Video-Tutorial: [link]
 - Support: [email/channel]
 - Fragen? Kommentar hier hinterlassen
@@ -289,14 +289,14 @@ Danke für Verständnis!
 # Pseudocode für Skript
 def find_redundancies():
     routines = load_all_routines()
-    
+
     for i, routine_a in enumerate(routines):
         for routine_b in routines[i+1:]:
             similarity = calculate_similarity(routine_a, routine_b)
-            
+
             if similarity > 0.8:
                 flag_redundancy(routine_a, routine_b, similarity)
-    
+
     return redundancy_report()
 ```
 
@@ -327,11 +327,11 @@ def find_redundancies():
 
 ## 📞 Eskalation & Support
 
-**Fragen bei:** [Process Owner / Team Lead]  
-**Anfragen-Kanal:** [Email / Slack / Issue]  
+**Fragen bei:** [Process Owner / Team Lead]
+**Anfragen-Kanal:** [Email / Slack / Issue]
 **Escalation:** Wenn sich Teams nicht einigen können
 
 ---
 
-**Version:** 1.0  
+**Version:** 1.0
 **Letzte Aktualisierung:** 23.03.2026

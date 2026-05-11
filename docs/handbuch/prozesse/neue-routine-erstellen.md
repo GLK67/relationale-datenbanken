@@ -1,8 +1,8 @@
 # PROZESS: Neue Routine erstellen
 
-**Dokumentversion:** 1.0  
-**Ziel:** Standardisierter Prozess für das Erstellen neuer Lernroutinen  
-**Zielgruppe:** Alle Entwickler, Dokumentatoren, Prozess-Manager  
+**Dokumentversion:** 1.0
+**Ziel:** Standardisierter Prozess für das Erstellen neuer Lernroutinen
+**Zielgruppe:** Alle Entwickler, Dokumentatoren, Prozess-Manager
 
 ---
 
@@ -14,7 +14,7 @@ Dieser Prozess sichert:
 - ✅ **Keine Redundanzen** - Bestehende Routinen werden überprüft
 - ✅ **Nachvollziehbarkeit** - Alle Entscheidungen werden dokumentiert
 
-**Geschätzter Gesamtaufwand:** 1-2 Stunden  
+**Geschätzter Gesamtaufwand:** 1-2 Stunden
 **Rollen:** Ersteller, Reviewer, Approver
 
 ---
@@ -81,7 +81,7 @@ Dieser Prozess sichert:
    ```bash
    # Beispiel für kurzfristige Routine
    touch docs/handbuch/routinen/kurzfristig/KF-ROUTINE-001-Name.md
-   
+
    # Beispiel für mittelfristige Routine
    touch docs/handbuch/routinen/mittelfristig/MF-ROUTINE-001-Name.md
    ```
@@ -159,7 +159,7 @@ Dieser Prozess sichert:
    ```bash
    # In VS Code öffnen und Preview ansehen
    code docs/handbuch/routinen/[kategorie]/[ROUTINE].md
-   
+
    # Oder: Markdown in Terminal sichtbar machen
    cat docs/handbuch/routinen/[kategorie]/[ROUTINE].md | head -50
    ```
@@ -196,21 +196,21 @@ Dieser Prozess sichert:
    - Description:
      ```markdown
      ## Neue Routine: [Name]
-     
+
      ### Was wurde hinzugefügt?
      [Kurzbeschreibung]
-     
+
      ### Kategorie & Zeitraum
      - Kategorie: kurzfristig / mittelfristig / langfristig
      - Häufigkeit: täglich / wöchentlich / monatlich / jährlich
-     
+
      ### Warum ist das wichtig?
      [Begründung]
-     
+
      ### Abhängigkeiten
      - [ ] [ROUTINE-XXX: Name]
      - [ ] [ROUTINE-YYY: Name]
-     
+
      ### Checkliste
      - [x] Template vollständig ausgefüllt
      - [x] Keine Redundanzen identifiziert
@@ -238,10 +238,10 @@ Dieser Prozess sichert:
    ```bash
    # Branch noch lokal?
    git checkout routine/ROUTINE-XXX-beschreibender-name
-   
+
    # Änderungen machen...
    # ...
-   
+
    # Commit:
    git add .
    git commit -m "Review-Feedback: [Was geändert wurde]"
@@ -348,5 +348,5 @@ grep -r "Schlagwort" docs/handbuch/routinen/
 
 ---
 
-**Version:** 1.0  
+**Version:** 1.0
 **Letzte Aktualisierung:** 23.03.2026

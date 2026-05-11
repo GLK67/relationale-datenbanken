@@ -1,8 +1,8 @@
 # PROZESS: Review & Genehmigung
 
-**Dokumentversion:** 1.0  
-**Ziel:** Standardisierte Qualitätsprüfung aller Routinen  
-**Zielgruppe:** Reviewer, Approver, Dokumentatoren  
+**Dokumentversion:** 1.0
+**Ziel:** Standardisierte Qualitätsprüfung aller Routinen
+**Zielgruppe:** Reviewer, Approver, Dokumentatoren
 
 ---
 
@@ -208,22 +208,22 @@ Vor dem Review sicherstellen:
 ```
 Tag 1 (Morgens):
   → Autor öffnet PR
-  
+
 Tag 1 (Mittags):
   → Reviewer macht erste Review (1-2h)
-  
+
 Tag 1-2 (Nachmittag):
   → Autor sieht Feedback & plant Changes
-  
+
 Tag 2 (Morgens):
   → Autor macht Änderungen & pushed
-  
+
 Tag 2 (Mittags):
   → Reviewer macht Final-Review (30 Min)
-  
+
 Tag 2 (Nachmittag):
   → Approver kann mergen
-  
+
 Tag 3 (Morgens):
   → In Produktion
 ```
@@ -315,5 +315,5 @@ Merge & Publish
 
 ---
 
-**Version:** 1.0  
+**Version:** 1.0
 **Letzte Aktualisierung:** 23.03.2026
