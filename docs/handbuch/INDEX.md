@@ -36,6 +36,8 @@
 - **[routinen/langfristig/](routinen/langfristig/)** - Jährlich/Strategisch (Langfristig)
 - **[routinen/kurzfristig/KF-ROUTINE-008-separater-sql-3nf-kontext.md](routinen/kurzfristig/KF-ROUTINE-008-separater-sql-3nf-kontext.md)** - Pflicht bei Klassenarbeits-/Pruefungs-Generierung mit SQL-Teil
 - **[routinen/kurzfristig/KF-ROUTINE-009-eerm-png-generator.md](routinen/kurzfristig/KF-ROUTINE-009-eerm-png-generator.md)** - Generator fuer eingebettete Teil-C-Modellgrafik (.png)
+- **[routinen/kurzfristig/KF-ROUTINE-010-datei-bezeichnungskonvention.md](routinen/kurzfristig/KF-ROUTINE-010-datei-bezeichnungskonvention.md)** - Verbindliche Datei-Bezeichnungskonvention fuer alle Artefakte
+- **[routinen/kurzfristig/KF-ROUTINE-011-drei-versionen-klassenarbeit.md](routinen/kurzfristig/KF-ROUTINE-011-drei-versionen-klassenarbeit.md)** - Automatismus fuer VERSION1/2/3 mit gleicher Schwierigkeit und variierenden Kontexten
 
 ---
 

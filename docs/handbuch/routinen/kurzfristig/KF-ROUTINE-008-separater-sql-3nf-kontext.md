@@ -23,7 +23,8 @@ Sicherstellen, dass Modellierungsaufgaben (Teil B) und SQL-Abfragen (Teil C) did
    - Andere Domaine als Teil B verwenden.
    - Konkreten Sachverhalt mit mehreren Entitaeten und Beziehungen definieren.
 3. SQL-Datenbank in 3NF erstellen.
-   - Struktur in dump-Datei dokumentieren: KAxx_..._schema_data_dump.sql.
+   - Struktur in eigener Datei dokumentieren: `{Systemname}_struktur_{Jahr}.sql`.
+   - Daten in eigener Datei dokumentieren: `{Systemname}_daten_{Jahr}.sql`.
    - Parent-Tabellen mit ca. 20 Datensaetzen befuellen.
 4. EERM fuer SQL-Kontext erstellen.
    - Datei: KAxx_..._SQLDB_EERM.mwb (Workbench-Modellcontainer).
@@ -40,15 +41,16 @@ Sicherstellen, dass Modellierungsaufgaben (Teil B) und SQL-Abfragen (Teil C) did
 
 ## Erfolgskriterien
 - Teil B und Teil C sind unterschiedliche Kontexte.
-- SQL-Dump (Teil C) vorhanden und konsistent.
+- SQL-Teil C liegt getrennt vor als Struktur- und Daten-Datei.
 - SQLDB-EERM (.mwb) als gueltiger Modellcontainer vorhanden.
 - Wenn Workbench verfuegbar: SQLDB-EERM-Grafik (.png) vorhanden.
+- KA-Markdown (`*_aufg.md`, `*_lsg.md`) haben jeweils einen zugehoerigen HTML-Export.
 - Pflicht-Gates laufen ohne Fehler durch.
 
 ## LLM-Prompt-Baustein (verbindlich)
 Bei der Generierung von Klassenarbeiten/Pruefungen immer ergaenzen:
 
-"Teil B (Modellierung) und Teil C (SQL) muessen unterschiedliche Kontexte verwenden. Teil C basiert auf einer separaten, in 3NF normalisierten Datenbank mit eigenem Sachverhalt. Erzeuge fuer Teil C immer SQL-Dump, EERM (.mwb) und wenn moeglich Workbench-Grafik (.png) mit Notation 'Connect to columns'."
+"Teil B (Modellierung) und Teil C (SQL) muessen unterschiedliche Kontexte verwenden. Teil C basiert auf einer separaten, in 3NF normalisierten Datenbank mit eigenem Sachverhalt. Erzeuge fuer Teil C immer getrennte SQL-Dateien fuer Struktur und Daten (`*_struktur_*.sql`, `*_daten_*.sql`), EERM (.mwb) und wenn moeglich Workbench-Grafik (.png) mit Notation 'Connect to columns'."
 
 ## Changelog
 - 1.0 (10.05.2026): Initiale Routine fuer didaktisch getrennten SQL-3NF-Kontext eingefuehrt.

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Embed EERM PNG references into generated Klassenarbeit markdown files.
 
-The script scans markdown files, derives the KA prefix, and injects a markdown
-image reference to <prefix>_SQLDB_EERM.png when missing.
+The script scans KA markdown files (naming convention KF-ROUTINE-010:
+*_aufg.md and *_lsg.md) and injects a PNG image reference when missing.
+The PNG filename is read from the YAML frontmatter field 'sql_db_eerm_grafik'.
 """
 
 from __future__ import annotations
@@ -13,23 +14,22 @@ import re
 from dataclasses import dataclass
 
 
-PREFIX_PATTERNS = (
-    re.compile(r"^(?P<prefix>.+)_Muster_EERM_SQL\.md$"),
-    re.compile(r"^(?P<prefix>.+)_(AUFGABEN|LOESUNG)_.+\.md$"),
-)
+# KF-ROUTINE-010: KA documents follow {KAxx}_{klasse}_{year}_{year}_{version}_{aufg|lsg}.md
+KA_PATTERN = re.compile(r"^KA\d+_.+_(aufg|lsg)\.md$")
+FRONTMATTER_PNG_RE = re.compile(r"^\s*sql_db_eerm_grafik:\s*['\"]?(?P<png>[^'\"\n]+)['\"]?\s*$", re.MULTILINE)
 
 
 @dataclass(frozen=True)
 class EmbedTarget:
     markdown_file: pathlib.Path
     png_file: pathlib.Path
-    prefix: str
+    prefix: str  # kept for compatibility
 
 
 class MarkdownEermEmbedder:
-    """Injects a standard image block for SQLDB EERM PNG references."""
+    """Injects a standard image block for EERM PNG references (KF-ROUTINE-010)."""
 
-    _image_regex = re.compile(r"!\[[^\]]*SQL-Kontext[^\]]*\]\([^\)]*_SQLDB_EERM\.png\)")
+    _image_regex = re.compile(r"!\[[^\]]*SQL-Kontext[^\]]*\]\([^\)]*\.png\)")
 
     def __init__(self, markdown_dir: pathlib.Path, dry_run: bool = False) -> None:
         self._markdown_dir = markdown_dir
@@ -54,14 +54,16 @@ class MarkdownEermEmbedder:
         return 0
 
     def _resolve_target(self, markdown_file: pathlib.Path) -> EmbedTarget | None:
-        filename = markdown_file.name
-        for pattern in PREFIX_PATTERNS:
-            match = pattern.match(filename)
-            if match:
-                prefix = match.group("prefix")
-                png_file = markdown_file.parent / f"{prefix}_SQLDB_EERM.png"
-                return EmbedTarget(markdown_file=markdown_file, png_file=png_file, prefix=prefix)
-        return None
+        # Only process KA documents following KF-ROUTINE-010 naming convention.
+        if not KA_PATTERN.match(markdown_file.name):
+            return None
+        text = markdown_file.read_text(encoding="utf-8", errors="replace")
+        m = FRONTMATTER_PNG_RE.search(text)
+        if not m:
+            return None
+        png_name = m.group("png").strip()
+        png_file = markdown_file.parent / png_name
+        return EmbedTarget(markdown_file=markdown_file, png_file=png_file, prefix=markdown_file.stem)
 
     def _process_one(self, target: EmbedTarget) -> str:
         text = target.markdown_file.read_text(encoding="utf-8")

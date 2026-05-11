@@ -5,7 +5,7 @@ Dieses Plugin erzeugt PNG-Modellgrafiken fuer SQL-Kontexte von Klassenarbeiten a
 ## Ziel
 
 - Lesbare EERM-Referenzgrafik aus Tabellen und Fremdschluesseln des SQL-Dumps
-- Stabiler Generator fuer `*_SQLDB_EERM.mwb` + `*_schema_data_dump.sql`
+- Stabiler Generator fuer `{Systemname}_struktur_{Jahr}.sql` + `{Systemname}_daten_{Jahr}.sql`
 
 ## Voraussetzung
 
@@ -50,8 +50,8 @@ python3 scripts/plugins/eerm_grafik_generator/generate_eerm_png.py \
 
 ## Verhalten
 
-- Sucht rekursiv nach `*_SQLDB_EERM.mwb`
-- Liest zu jedem Modell den passenden Dump `*_schema_data_dump.sql`
+- Sucht rekursiv nach `*_struktur_*.sql`
+- Prueft zu jeder Strukturdatei die passende Daten-Datei `*_daten_*.sql`
 - Rendert daraus Tabellenkarten und FK-Beziehungen als PNG
 - Routed FK-Linien orthogonal um unbeteiligte Tabellen herum, statt Karten zu kreuzen
 - Ueberschreibt bestehende PNGs nur mit `--force`

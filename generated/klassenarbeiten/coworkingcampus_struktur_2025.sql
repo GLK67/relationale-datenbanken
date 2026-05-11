@@ -1,0 +1,89 @@
+-- SQL-Struktur Teil C (Version 2)
+DROP DATABASE IF EXISTS ka02_bg12_2025_sqlteil_v2;
+CREATE DATABASE ka02_bg12_2025_sqlteil_v2 CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE ka02_bg12_2025_sqlteil_v2;
+
+DROP TABLE IF EXISTS zahlungen;
+DROP TABLE IF EXISTS supporttickets;
+DROP TABLE IF EXISTS buchungen;
+DROP TABLE IF EXISTS arbeitsplaetze;
+DROP TABLE IF EXISTS tarifmodelle;
+DROP TABLE IF EXISTS standorte;
+DROP TABLE IF EXISTS betreuende;
+DROP TABLE IF EXISTS kunden;
+
+CREATE TABLE kunden (
+  kunde_id INT PRIMARY KEY,
+  vorname VARCHAR(50) NOT NULL,
+  nachname VARCHAR(50) NOT NULL,
+  studiengang VARCHAR(80) NOT NULL,
+  registriert_am DATE NOT NULL,
+  aktiv TINYINT(1) NOT NULL DEFAULT 1
+);
+
+CREATE TABLE betreuende (
+  betreuer_id INT PRIMARY KEY,
+  vorname VARCHAR(50) NOT NULL,
+  nachname VARCHAR(50) NOT NULL,
+  rolle ENUM('Support','Betrieb','Leitung') NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE
+);
+
+CREATE TABLE standorte (
+  standort_id INT PRIMARY KEY,
+  bezeichnung VARCHAR(100) NOT NULL,
+  gebaeude VARCHAR(80) NOT NULL,
+  etage INT NOT NULL,
+  aktiv TINYINT(1) NOT NULL DEFAULT 1
+);
+
+CREATE TABLE tarifmodelle (
+  tarif_id INT PRIMARY KEY,
+  tarifname VARCHAR(80) NOT NULL,
+  stundenpreis DECIMAL(6,2) NOT NULL,
+  max_personen INT NOT NULL
+);
+
+CREATE TABLE arbeitsplaetze (
+  platz_id INT PRIMARY KEY,
+  standort_id INT NOT NULL,
+  tarif_id INT NOT NULL,
+  platzcode VARCHAR(30) NOT NULL UNIQUE,
+  status ENUM('frei','belegt','gesperrt') NOT NULL DEFAULT 'frei',
+  CONSTRAINT fk_platz_standort FOREIGN KEY (standort_id) REFERENCES standorte(standort_id),
+  CONSTRAINT fk_platz_tarif FOREIGN KEY (tarif_id) REFERENCES tarifmodelle(tarif_id)
+);
+
+CREATE TABLE buchungen (
+  buchung_id INT PRIMARY KEY,
+  kunde_id INT NOT NULL,
+  platz_id INT NOT NULL,
+  startzeit DATETIME NOT NULL,
+  endzeit DATETIME,
+  status ENUM('laufend','abgeschlossen','storniert') NOT NULL DEFAULT 'laufend',
+  CONSTRAINT fk_buchung_kunde FOREIGN KEY (kunde_id) REFERENCES kunden(kunde_id),
+  CONSTRAINT fk_buchung_platz FOREIGN KEY (platz_id) REFERENCES arbeitsplaetze(platz_id)
+);
+
+CREATE TABLE supporttickets (
+  ticket_id INT PRIMARY KEY,
+  kunde_id INT NOT NULL,
+  buchung_id INT,
+  betreuer_id INT,
+  erstellt_am DATETIME NOT NULL,
+  prioritaet ENUM('niedrig','mittel','hoch') NOT NULL,
+  status ENUM('offen','in_bearbeitung','geloest') NOT NULL DEFAULT 'offen',
+  CONSTRAINT fk_ticket_kunde FOREIGN KEY (kunde_id) REFERENCES kunden(kunde_id),
+  CONSTRAINT fk_ticket_buchung FOREIGN KEY (buchung_id) REFERENCES buchungen(buchung_id),
+  CONSTRAINT fk_ticket_betreuer FOREIGN KEY (betreuer_id) REFERENCES betreuende(betreuer_id)
+);
+
+CREATE TABLE zahlungen (
+  zahlung_id INT PRIMARY KEY,
+  buchung_id INT NOT NULL,
+  betrag DECIMAL(7,2) NOT NULL,
+  zahlart ENUM('Karte','Lastschrift','App') NOT NULL,
+  bezahlt_am DATETIME NOT NULL,
+  zahlstatus ENUM('offen','bezahlt','storniert') NOT NULL DEFAULT 'bezahlt',
+  CONSTRAINT fk_zahlung_buchung FOREIGN KEY (buchung_id) REFERENCES buchungen(buchung_id)
+);

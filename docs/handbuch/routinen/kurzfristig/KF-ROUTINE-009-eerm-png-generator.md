@@ -16,7 +16,8 @@ Die Generatorgrafik wird aus dem SQL-Dump gerendert (Tabellen + FKs), damit sie 
 Die Linien werden so geroutet, dass unbeteiligte Entitaetstypen umfahren werden und nicht durchlaufen werden.
 
 ## Vorbedingungen
-- Teil-C-Modell als `*_SQLDB_EERM.mwb` liegt im Verzeichnis `generated/klassenarbeiten`.
+- Teil-C-Modell als `{Systemname}_{Jahr}.mwb` liegt im Verzeichnis `generated/klassenarbeiten`.
+- SQL-Teil C liegt getrennt vor als `{Systemname}_struktur_{Jahr}.sql` und `{Systemname}_daten_{Jahr}.sql`.
 - Python 3 ist verfuegbar.
 
 ## Schritte
@@ -24,12 +25,12 @@ Die Linien werden so geroutet, dass unbeteiligte Entitaetstypen umfahren werden 
   - `bash scripts/generate-ka-eerm-assets.sh`
   - optional mit Ueberschreiben bestehender PNGs: `bash scripts/generate-ka-eerm-assets.sh --force`
 2. Ausgabe pruefen:
-   - Fuer jede `*_SQLDB_EERM.mwb` existiert danach `*_SQLDB_EERM.png`.
+  - Fuer jede `{Systemname}_struktur_{Jahr}.sql` mit passender Daten-Datei existiert danach `{Systemname}_{Jahr}.png`.
 3. Bei Bedarf manuell in zwei Schritten ausfuehren:
   - `python3 scripts/plugins/eerm_grafik_generator/generate_eerm_png.py --input-dir generated/klassenarbeiten`
   - `python3 scripts/plugins/eerm_grafik_generator/embed_eerm_png_reference.py --markdown-dir generated/klassenarbeiten`
 4. In Aufgaben-/Lehrkraftvorlage Grafik einbetten (Template-Ebene):
-  - `![EERM Teil C](../../../generated/klassenarbeiten/KAxx_..._SQLDB_EERM.png)`
+  - `![EERM Teil C](../../../generated/klassenarbeiten/{Systemname}_{Jahr}.png)`
 5. Pflicht-Gates ausfuehren:
    - `bash scripts/validate-security.sh`
    - `bash scripts/validate-architecture.sh`
@@ -42,9 +43,10 @@ Die Linien werden so geroutet, dass unbeteiligte Entitaetstypen umfahren werden 
 - Pflicht-Gates laufen erfolgreich durch.
 
 ## Fehlerbehandlung
-- Kein `*_SQLDB_EERM.mwb` gefunden:
+- Kein `{Systemname}_{Jahr}.mwb` gefunden:
   - Dateibenennung und Ablagepfad korrigieren.
 - PNG nicht erstellt:
+  - Pruefen, ob sowohl `{Systemname}_struktur_{Jahr}.sql` als auch `{Systemname}_daten_{Jahr}.sql` vorhanden sind.
   - Skript-Fehlermeldung pruefen und Dateirechte kontrollieren.
 - Manuelle Workbench-Grafik vorhanden:
   - Diese darf die Generatorgrafik ersetzen (Workbench bleibt bevorzugt).
@@ -52,7 +54,7 @@ Die Linien werden so geroutet, dass unbeteiligte Entitaetstypen umfahren werden 
   - Diese wird in Workbench gepflegt; der PNG-Generator erzeugt keine native Designerbearbeitung.
 
 ## LLM-Prompt-Baustein (verbindlich)
-"Wenn fuer Teil C keine Workbench-Grafik vorliegt, erzeuge automatisch eine PNG-Grafik aus dem vorhandenen `*_SQLDB_EERM.mwb` ueber das Generator-Plugin und binde die Grafik in Aufgaben- und Lehrkraftvorlage ein."
+"Wenn fuer Teil C keine Workbench-Grafik vorliegt, erzeuge automatisch eine PNG-Grafik aus den vorhandenen SQL-Artefakten (`*_struktur_*.sql` + `*_daten_*.sql`) ueber das Generator-Plugin und binde die Grafik in Aufgaben- und Lehrkraftvorlage ein."
 
 ## Verknuepfungen
 - [KF-ROUTINE-008-separater-sql-3nf-kontext.md](./KF-ROUTINE-008-separater-sql-3nf-kontext.md)

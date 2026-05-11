@@ -24,23 +24,68 @@ check_mwb_container() {
   fi
 }
 
-for md in generated/klassenarbeiten/*_Muster_EERM_SQL.md; do
+check_md_html_pairs() {
+  local dir="generated/klassenarbeiten"
+
+  # Every KA markdown (aufg/lsg) must have a matching HTML export.
+  for md in "$dir"/KA*_*.md; do
+    [[ -e "$md" ]] || continue
+    case "$md" in
+      *_aufg.md|*_lsg.md)
+        local html="${md%.md}.html"
+        if [[ ! -f "$html" ]]; then
+          note_fail "Fehlender HTML-Export fuer Markdown: $html"
+        fi
+        ;;
+    esac
+  done
+
+  # Every KA HTML must have a matching markdown source.
+  for html in "$dir"/KA*_*.html; do
+    [[ -e "$html" ]] || continue
+    local md="${html%.html}.md"
+    if [[ ! -f "$md" ]]; then
+      note_fail "Verwaiste HTML-Datei ohne Markdown-Quelle: $html"
+    fi
+  done
+}
+
+check_md_html_pairs
+
+# KF-ROUTINE-010: KA-Loesungsdokumente folgen *_lsg.md Konvention.
+# Artefakt-Pruefung: {systemname}_{year}.mwb, {systemname}_struktur_{year}.sql, {systemname}_{year}.png
+for md in generated/klassenarbeiten/*_lsg.md; do
   [[ -e "$md" ]] || continue
 
   base_name="${md##*/}"
-  prefix="${base_name%_Muster_EERM_SQL.md}"
   dir="generated/klassenarbeiten"
 
-  sql_dump="$dir/${prefix}_schema_data_dump.sql"
-  model_part_b="$dir/${prefix}_EERM.mwb"
-  sql_model="$dir/${prefix}_SQLDB_EERM.mwb"
-  sql_png="$dir/${prefix}_SQLDB_EERM.png"
+  # Lese SQL-/Modellartefakte aus YAML-Frontmatter
+  sql_dump_name=$(grep -oP '^\s*sql_db_dump:\s*["\x27]?\K[^"\x27\n]+' "$md" | head -1 | sed 's/^\s*//; s/\s*$//')
+  sql_data_name=$(grep -oP '^\s*sql_db_daten:\s*["\x27]?\K[^"\x27\n]+' "$md" | head -1 | sed 's/^\s*//; s/\s*$//')
+  sql_eerm_name=$(grep -oP '^\s*sql_db_eerm:\s*["\x27]?\K[^"\x27\n]+' "$md" | head -1 | sed 's/^\s*//; s/\s*$//')
+  sql_png_name=$(grep -oP '^\s*sql_db_eerm_grafik:\s*["\x27]?\K[^"\x27\n]+' "$md" | head -1 | sed 's/^\s*//; s/\s*$//')
+  eerm_lehrkraft=$(grep -oP '^\s*modellierung_eerm_lehrkraft:\s*["\x27]?\K[^"\x27\n]+' "$md" | head -1 | sed 's/^\s*//; s/\s*$//')
 
-  check_file_exists "$sql_dump"
-  check_file_exists "$model_part_b"
-  check_file_exists "$sql_model"
-  check_mwb_container "$model_part_b"
-  check_mwb_container "$sql_model"
+  [[ -n "$sql_dump_name" ]] && sql_dump="$dir/$sql_dump_name" || sql_dump=""
+  [[ -n "$sql_data_name" ]] && sql_data="$dir/$sql_data_name" || sql_data=""
+  [[ -n "$sql_eerm_name" ]] && sql_model="$dir/$sql_eerm_name" || sql_model=""
+  [[ -n "$sql_png_name" ]] && sql_png="$dir/$sql_png_name" || sql_png=""
+  [[ -n "$eerm_lehrkraft" ]] && model_part_b="$dir/$eerm_lehrkraft" || model_part_b=""
+
+  if [[ -n "$sql_dump_name" ]] && [[ "$sql_dump_name" != *_struktur_*.sql ]]; then
+    note_fail "$md: sql_db_dump muss auf *_struktur_*.sql zeigen"
+  fi
+  if [[ -n "$sql_data_name" ]] && [[ "$sql_data_name" != *_daten_*.sql ]]; then
+    note_fail "$md: sql_db_daten muss auf *_daten_*.sql zeigen"
+  fi
+
+  [[ -n "$sql_dump" ]] && check_file_exists "$sql_dump"
+  [[ -n "$sql_data" ]] && check_file_exists "$sql_data"
+  [[ -n "$model_part_b" ]] && check_file_exists "$model_part_b"
+  [[ -n "$sql_model" ]] && check_file_exists "$sql_model"
+  [[ -n "$model_part_b" ]] && [[ -f "$model_part_b" ]] && check_mwb_container "$model_part_b"
+  [[ -n "$sql_model" ]] && [[ -f "$sql_model" ]] && check_mwb_container "$sql_model"
 
   if ! grep -qi "separater sql-kontext" "$md"; then
     note_fail "$md: Hinweis auf separaten SQL-Kontext fehlt"
@@ -54,9 +99,9 @@ for md in generated/klassenarbeiten/*_Muster_EERM_SQL.md; do
     note_fail "$md: 3NF-Anforderung fuer SQL-Kontext fehlt"
   fi
 
-  if [[ -f "$sql_png" ]]; then
+  if [[ -n "$sql_png" ]] && [[ -f "$sql_png" ]]; then
     echo "[ka-separate-context] INFO: Workbench-Grafik gefunden: $sql_png"
-  else
+  elif [[ -n "$sql_png" ]]; then
     echo "[ka-separate-context] INFO: Keine Workbench-Grafik gefunden, versuche Generator: $sql_png"
     python3 scripts/plugins/eerm_grafik_generator/generate_eerm_png.py --input-dir "$dir" || true
     if [[ -f "$sql_png" ]]; then

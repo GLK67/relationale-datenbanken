@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Generate schema-based EERM PNG diagrams for SQLDB model artifacts.
+"""Generate schema-based EERM PNG diagrams from separated SQL artifacts.
 
-This utility scans for `*_SQLDB_EERM.mwb`, finds the matching SQL dump
-(`*_schema_data_dump.sql`), parses tables and foreign keys, and renders a
-readable PNG suitable for classroom usage.
+This utility scans for `*_struktur_*.sql` files (naming convention
+KF-ROUTINE-010), checks for the matching `*_daten_*.sql`, parses tables and
+foreign keys from the structure file, and renders a readable PNG
+(`{systemname}_{year}.png`) suitable for classroom usage.
 """
 
 from __future__ import annotations
@@ -704,37 +705,60 @@ class SchemaDiagramRenderer:
         image = Image.new("RGB", (1400, 800), (247, 249, 253))
         draw = ImageDraw.Draw(image)
         draw.text((80, 80), "Keine Tabellen im SQL-Dump gefunden", fill=(80, 40, 40), font=self._title_font)
-        draw.text((80, 130), "Bitte *_schema_data_dump.sql pruefen.", fill=(90, 95, 110), font=self._text_font)
+        draw.text((80, 130), "Bitte *_struktur_*.sql und *_daten_*.sql pruefen (KF-ROUTINE-010).", fill=(90, 95, 110), font=self._text_font)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         image.save(output_path, format="PNG", optimize=True)
 
 
-def find_model_files(input_dir: pathlib.Path) -> list[pathlib.Path]:
-    return sorted(input_dir.rglob("*_SQLDB_EERM.mwb"))
+def find_struktur_files(input_dir: pathlib.Path) -> list[pathlib.Path]:
+    """Find structure dump files matching the convention *_struktur_*.sql (KF-ROUTINE-010).
+    
+    Convention:
+      {systemname}_struktur_{year}.sql  (paired with {systemname}_daten_{year}.sql)
+    """
+    return sorted(input_dir.rglob("*_struktur_*.sql"))
 
 
-def find_sql_dump_for_model(model_file: pathlib.Path) -> pathlib.Path | None:
-    if model_file.name.endswith("_SQLDB_EERM.mwb"):
-        prefix = model_file.name[: -len("_SQLDB_EERM.mwb")]
-        candidate = model_file.parent / f"{prefix}_schema_data_dump.sql"
-        if candidate.exists():
-            return candidate
-
-    stem_candidate = model_file.with_suffix(".sql")
-    if stem_candidate.exists():
-        return stem_candidate
+def find_daten_file(struktur_file: pathlib.Path) -> pathlib.Path | None:
+    """Find corresponding data dump file for a structure file.
+    
+    Example:
+      Input:  /path/stadtfahrradverleih_struktur_2025.sql
+      Output: /path/stadtfahrradverleih_daten_2025.sql
+    """
+    name = struktur_file.stem  # e.g. 'stadtfahrradverleih_struktur_2025'
+    parts = name.split("_struktur_")
+    if len(parts) == 2:
+        systemname, year = parts[0], parts[1]
+        daten_file = struktur_file.parent / f"{systemname}_daten_{year}.sql"
+        return daten_file if daten_file.exists() else None
     return None
+
+
+def derive_png_path(struktur_file: pathlib.Path) -> pathlib.Path:
+    """Derive the output PNG path from the structure filename.
+
+    Convention (KF-ROUTINE-010):
+      {systemname}_struktur_{year}.sql  ->  {systemname}_{year}.png
+    """
+    name = struktur_file.stem  # e.g. 'stadtfahrradverleih_struktur_2025'
+    parts = name.split("_struktur_")
+    if len(parts) == 2:
+        systemname, year = parts[0], parts[1]
+        return struktur_file.parent / f"{systemname}_{year}.png"
+    # Fallback: replace .sql extension with .png
+    return struktur_file.with_suffix(".png")
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate fallback PNG diagrams for *_SQLDB_EERM.mwb files."
+        description="Generate PNG diagrams from *_struktur_*.sql files (KF-ROUTINE-010)."
     )
     parser.add_argument(
         "--input-dir",
         type=pathlib.Path,
         default=pathlib.Path("generated/klassenarbeiten"),
-        help="Directory to scan recursively for *_SQLDB_EERM.mwb files",
+        help="Directory to scan recursively for *_struktur_*.sql files paired with *_daten_*.sql",
     )
     parser.add_argument(
         "--force",
@@ -755,29 +779,27 @@ def main() -> int:
         print(f"ERROR input directory does not exist: {args.input_dir}")
         return 2
 
-    model_files = find_model_files(args.input_dir)
-    if not model_files:
-        print(f"INFO no *_SQLDB_EERM.mwb files found in {args.input_dir}")
+    struktur_files = find_struktur_files(args.input_dir)
+    if not struktur_files:
+        print(f"INFO no *_struktur_*.sql files found in {args.input_dir}")
         return 0
 
-    parser = SqlSchemaParser()
+    sql_parser = SqlSchemaParser()
     renderer = SchemaDiagramRenderer(strict_plus=args.strict_plus)
 
-    for model_file in model_files:
-        png_file = model_file.with_suffix(".png")
+    for struktur_file in struktur_files:
+        daten_file = find_daten_file(struktur_file)
+        if daten_file is None:
+            print(f"WARN {struktur_file}: kein entsprechendes *_daten_*.sql file gefunden, ueberspringe...")
+            continue
+
+        png_file = derive_png_path(struktur_file)
         if png_file.exists() and not args.force:
             print(f"SKIP {png_file} (already exists)")
             continue
 
-        sql_dump = find_sql_dump_for_model(model_file)
-        if sql_dump is None:
-            print(f"WARN {model_file}: no matching SQL dump found, writing fallback image")
-            renderer.render([], [], png_file)
-            print(f"OK   {png_file}")
-            continue
-
-        sql_text = sql_dump.read_text(encoding="utf-8")
-        tables, fks = parser.parse(sql_text)
+        struktur_text = struktur_file.read_text(encoding="utf-8")
+        tables, fks = sql_parser.parse(struktur_text)
         renderer.render(tables, fks, png_file)
         print(f"OK   {png_file} (tables={len(tables)}, fks={len(fks)})")
 

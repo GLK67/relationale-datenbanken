@@ -4,8 +4,6 @@ Konvertiert Muster-Klassenarbeit von Markdown zu verschiedenen Formaten.
 Erstellt auch Validierungen und Metadaten.
 """
 
-import os
-import sys
 import markdown
 from pathlib import Path
 
@@ -127,38 +125,52 @@ def extract_metadata(md_file):
     for num, title in aufgaben:
         print(f"  Aufgabe {num}: {title.strip()[:60]}...")
 
+def find_ka_markdown_files(base_dir: Path) -> list[Path]:
+    """Find KA markdown files following KF-ROUTINE-010 naming.
+
+    Allowed suffixes:
+    - *_aufg.md
+    - *_lsg.md
+    """
+    files: list[Path] = []
+    for md_file in sorted(base_dir.glob("KA*_*.md")):
+        name = md_file.name
+        if name.endswith("_aufg.md") or name.endswith("_lsg.md"):
+            files.append(md_file)
+    return files
+
+
 def main():
-    md_file = "/workspaces/edu-code-course-rdb/generated/klassenarbeiten/KA02_BG12_2024-2025_Muster_Online-Buecherverleih.md"
-    html_file = "/workspaces/edu-code-course-rdb/generated/klassenarbeiten/KA02_BG12_2024-2025_Muster_Online-Buecherverleih.html"
-    
-    if not os.path.exists(md_file):
-        print(f"❌ Datei nicht gefunden: {md_file}")
-        sys.exit(1)
-    
-    print(f"🔍 Verarbeite: {md_file}\n")
-    
-    # Validierung
-    validate_markdown(md_file)
-    
-    # Metadaten extrahieren
-    extract_metadata(md_file)
-    
-    # Zu HTML konvertieren
-    print(f"\n🔄 Konvertiere zu HTML...")
-    markdown_to_html(md_file, html_file)
-    print(f"✅ HTML erstellt: {html_file}")
-    
-    # Dateigröße anzeigen
-    md_size = os.path.getsize(md_file) / 1024
-    html_size = os.path.getsize(html_file) / 1024
-    print(f"\n📊 Dateigröße:")
-    print(f"  Markdown: {md_size:.1f} KB")
-    print(f"  HTML: {html_size:.1f} KB")
-    
-    print(f"\n✨ Fertig! Dateien erstellt:")
-    print(f"  - Markdown: {md_file}")
-    print(f"  - HTML: {html_file}")
-    print(f"\n💡 Um zu DOCX zu konvertieren: pandoc {html_file} -o Klassenarbeit.docx")
+    base_dir = Path("/workspaces/edu-code-course-rdb/generated/klassenarbeiten")
+    md_files = find_ka_markdown_files(base_dir)
+
+    if not md_files:
+        print(f"❌ Keine KA-Markdown-Dateien gefunden in: {base_dir}")
+        raise SystemExit(1)
+
+    print(f"🔍 Gefundene KA-Markdown-Dateien: {len(md_files)}")
+
+    generated_html: list[Path] = []
+    for md_file in md_files:
+        html_file = md_file.with_suffix(".html")
+        print(f"\n🔄 Verarbeite: {md_file}")
+
+        # Validierung
+        validate_markdown(str(md_file))
+
+        # Metadaten extrahieren
+        extract_metadata(str(md_file))
+
+        # Zu HTML konvertieren
+        markdown_to_html(str(md_file), str(html_file))
+        print(f"✅ HTML erstellt: {html_file}")
+        generated_html.append(html_file)
+
+    print("\n✨ Fertig! Dateien erstellt:")
+    for html_file in generated_html:
+        print(f"  - {html_file}")
+    if generated_html:
+        print(f"\n💡 Um zu DOCX zu konvertieren: pandoc {generated_html[0]} -o Klassenarbeit.docx")
 
 if __name__ == "__main__":
     main()

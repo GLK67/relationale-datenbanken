@@ -6,6 +6,20 @@ Dieses Verzeichnis enthält Musterklassenarbeiten und Templates für den Unterri
 
 ## 📁 Dateien
 
+### Klassenarbeits-Set 2025/2026 (drei Versionen)
+
+- **[KA02_BG12_2025_2026_VERSION1_aufg.md](./KA02_BG12_2025_2026_VERSION1_aufg.md)** / **[KA02_BG12_2025_2026_VERSION1_lsg.md](./KA02_BG12_2025_2026_VERSION1_lsg.md)**
+  - VERSION1 (Haupttermin)
+- **[KA02_BG12_2025_2026_VERSION2_aufg.md](./KA02_BG12_2025_2026_VERSION2_aufg.md)** / **[KA02_BG12_2025_2026_VERSION2_lsg.md](./KA02_BG12_2025_2026_VERSION2_lsg.md)**
+  - VERSION2 (Nachtermin)
+- **[KA02_BG12_2025_2026_VERSION3_aufg.md](./KA02_BG12_2025_2026_VERSION3_aufg.md)** / **[KA02_BG12_2025_2026_VERSION3_lsg.md](./KA02_BG12_2025_2026_VERSION3_lsg.md)**
+  - VERSION3 (Muster/Uebung)
+
+Automatische Generierung/Pruefung des Dreier-Sets:
+```bash
+bash ../../scripts/generate-ka-varianten.sh KA02_BG12_2025_2026
+```
+
 ### Musterklassenarbeit (60 Minuten / 34 Punkte / EERM + SQL)
 
 - **[KA02_BG12_2025_60min_34P_Muster_EERM_SQL.md](./KA02_BG12_2025_60min_34P_Muster_EERM_SQL.md)**
@@ -16,13 +30,20 @@ Dieses Verzeichnis enthält Musterklassenarbeiten und Templates für den Unterri
 - **KA02_BG12_2025_60min_34P_EERM.mwb**
    - EERM-Modellspezifikation Teil B (Lehrkraft-Referenz)
 
-- **KA02_BG12_2025_60min_34P_schema_data_dump.sql**
-   - Struktur- und Datendump fuer Teil C (separater 3NF-Kontext: Stadtfahrradverleih)
-   - ✅ Parent-Tabellen mit ca. 20 Datensaetzen (`kunden`, `mitarbeitende`)
+- **stadtfahrradverleih_struktur_2025.sql**
+   - SQL-Struktur-Definition fuer Teil C (separater 3NF-Kontext: Stadtfahrradverleih)
+   - Enthaelt: CREATE DATABASE, CREATE TABLE, Constraints (FK, Indizes)
+   - ✅ Struktur-only (keine Daten)
 
-- **KA02_BG12_2025_60min_34P_SQLDB_EERM.mwb**
+- **stadtfahrradverleih_daten_2025.sql**
+   - SQL-Daten fuer Teil C (Musterdatensaetze fuer Abfragen)
+   - Enthaelt: USE-Statement, INSERT Statements
+   - ✅ Parent-Tabellen mit ca. 20 Datensaetzen (`kunden`, `mitarbeitende`)
+   - ✅ Separate Datei von der Struktur (KF-ROUTINE-010)
+
+- **stadtfahrradverleih_2025.mwb**
    - EERM-Modellspezifikation fuer die SQL-Datenbank in Teil C
-   - Als Modellcontainer abgelegt; fuer native Designerbearbeitung in Workbench aus SQL-Dump ableiten oder aktualisieren
+   - Als Modellcontainer abgelegt; fuer native Designerbearbeitung in Workbench aus SQL-Struktur und SQL-Daten ableiten oder aktualisieren
 
 - **KA02_BG12_2025_60min_34P_SQLDB_EERM.png** (optional)
    - SQL-basiert gerenderte Referenzgrafik (oder exportierte Workbench-Grafik) fuer Unterrichtsmaterial
@@ -149,7 +170,39 @@ Die Musterklassenarbeit kann leicht angepasst werden. Hier sind Ideen:
 
 ---
 
-## 📞 Support
+## � Benennungskonvention (KF-ROUTINE-010)
+
+Alle Dateien in diesem Verzeichnis folgen einer strikten Benennungskonvention:
+
+### Modell-Container (.mwb)
+- Format: `{Systemname}_{Jahr}.mwb`
+- Beispiel: `kursplattform_2025.mwb`, `stadtfahrradverleih_2025.mwb`
+
+### SQL-Struktur-Dumps (.sql)
+- Format: `{Systemname}_struktur_{Jahr}.sql`
+- Beispiel: `stadtfahrradverleih_struktur_2025.sql`
+- Enthaelt: CREATE DATABASE, CREATE TABLE, Constraints
+
+### SQL-Daten-Dumps (.sql)
+- Format: `{Systemname}_daten_{Jahr}.sql`
+- Beispiel: `stadtfahrradverleih_daten_2025.sql`
+- Enthaelt: USE, INSERT Statements (Musterdaten)
+- **Wichtig:** Struktur und Daten sind immer in separaten Dateien!
+
+### Klassenarbeits-Dokumente (.md)
+- **Aufgaben-Version:** `KA0x_{Zielgruppe}_{Schuljahr}_{Version}_aufg.md`
+  - Beispiel: `KA02_BG12_2025_2026_VERSION1_aufg.md`
+  - Enthaelt: Aufgabenstellen + Artefakt-Verweise (OHNE Loesung)
+
+- **Loesung-Version:** `KA0x_{Zielgruppe}_{Schuljahr}_{Version}_lsg.md`
+  - Beispiel: `KA02_BG12_2025_2026_VERSION1_lsg.md`
+  - Enthaelt: Aufgabenstellung + Musterloesung + Erwartungshorizont + Bewertung
+
+**[Vollständige Dokumentation der Benennungskonvention](../../docs/handbuch/routinen/kurzfristig/KF-ROUTINE-010-datei-bezeichnungskonvention.md)**
+
+---
+
+## �📞 Support
 
 Bei Fragen oder Verbesserungsvorschlägen:
 - Siehe [KLASSENAARBEIT-HANDBUCH.md](../KLASSENAARBEIT-HANDBUCH.md)
