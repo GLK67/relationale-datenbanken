@@ -22,6 +22,9 @@ class TableSummary:
     column_count: int
     fk_count: int
     index_count: int
+    columns: list[str]
+    fk_names: list[str]
+    index_names: list[str]
 
 
 @dataclass(frozen=True)
@@ -62,15 +65,27 @@ def _load_archive(path: pathlib.Path) -> ArchiveSummary:
         table_nodes = schema.findall('./value[@key="tables"]/value[@struct-name="db.mysql.Table"]')
         for table in table_nodes:
             table_name = _extract_text(table, './value[@key="name"]')
-            column_count = len(table.findall('./value[@key="columns"]/value[@struct-name="db.mysql.Column"]'))
-            fk_count = len(table.findall('./value[@key="foreignKeys"]/value[@struct-name="db.mysql.ForeignKey"]'))
-            index_count = len(table.findall('./value[@key="indices"]/value[@struct-name="db.mysql.Index"]'))
+            columns = [
+                _extract_text(column, './value[@key="name"]')
+                for column in table.findall('./value[@key="columns"]/value[@struct-name="db.mysql.Column"]')
+            ]
+            fk_names = [
+                _extract_text(fk, './value[@key="name"]')
+                for fk in table.findall('./value[@key="foreignKeys"]/value[@struct-name="db.mysql.ForeignKey"]')
+            ]
+            index_names = [
+                _extract_text(index, './value[@key="name"]')
+                for index in table.findall('./value[@key="indices"]/value[@struct-name="db.mysql.Index"]')
+            ]
             tables.append(
                 TableSummary(
                     name=table_name,
-                    column_count=column_count,
-                    fk_count=fk_count,
-                    index_count=index_count,
+                    column_count=len(columns),
+                    fk_count=len(fk_names),
+                    index_count=len(index_names),
+                    columns=columns,
+                    fk_names=fk_names,
+                    index_names=index_names,
                 )
             )
 
@@ -84,6 +99,13 @@ def _build_markdown(report: list[ArchiveSummary]) -> str:
     lines.append("# MWB Reference Analysis")
     lines.append("")
     lines.append("Ausgewertet wurden native MySQL-Workbench-Archive aus dem Referenzordner.")
+    lines.append("")
+    lines.append("## Ableitbare Generatorregeln")
+    lines.append("")
+    lines.append("- Native Archive enthalten `document.mwb.xml`, `lock` und `@db/data.db`.")
+    lines.append("- Die Referenzmodelle verwenden `utf8` mit `utf8_general_ci`.")
+    lines.append("- Das sichtbare Nutzschema ist vom leeren Workbench-`mydb`-Schema getrennt.")
+    lines.append("- Tabellen besitzen PRIMARY-Indexes und zu Fremdschluesseln passende Zusatzindizes.")
     lines.append("")
 
     for archive in report:
@@ -102,6 +124,12 @@ def _build_markdown(report: list[ArchiveSummary]) -> str:
                 lines.append(
                     f"    - {table.name}: columns={table.column_count}, fks={table.fk_count}, indices={table.index_count}"
                 )
+                if table.columns:
+                    lines.append(f"      - Spalten: {', '.join(table.columns)}")
+                if table.fk_names:
+                    lines.append(f"      - FKs: {', '.join(table.fk_names)}")
+                if table.index_names:
+                    lines.append(f"      - Indizes: {', '.join(table.index_names)}")
         lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
