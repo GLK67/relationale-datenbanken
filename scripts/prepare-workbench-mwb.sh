@@ -5,6 +5,8 @@ input_dir="generated/klassenarbeiten"
 output_guide="${input_dir}/WORKBENCH-MWB-WORKFLOW.md"
 only_system=""
 db_prefix="wb_"
+db_charset="utf8"
+db_collation="utf8_general_ci"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -24,6 +26,14 @@ while [[ $# -gt 0 ]]; do
       db_prefix="$2"
       shift 2
       ;;
+    --db-charset)
+      db_charset="$2"
+      shift 2
+      ;;
+    --db-collation)
+      db_collation="$2"
+      shift 2
+      ;;
     -h|--help)
       cat <<'EOF'
 Verwendung:
@@ -34,6 +44,8 @@ Optionen:
   --output-guide <pfad>   Zieldatei fuer den Workbench-Workflow (Default: generated/klassenarbeiten/WORKBENCH-MWB-WORKFLOW.md)
   --only-system <name>    Nur ein System verarbeiten (z. B. stadtfahrradverleih)
   --db-prefix <prefix>    Prefix fuer erzeugte Datenbanken (Default: wb_)
+  --db-charset <wert>     Zeichenkodierung fuer umgeschriebene DBs (Default: utf8)
+  --db-collation <wert>   Kollation fuer umgeschriebene DBs (Default: utf8_general_ci)
   -h, --help              Hilfe anzeigen
 
 Ergebnis:
@@ -93,19 +105,58 @@ sanitize_identifier() {
   echo "$value"
 }
 
+extract_db_charset() {
+  local source_file="$1"
+  local detected=""
+
+  detected="$(grep -Eio 'CHARACTER[[:space:]]+SET[[:space:]]+[A-Za-z0-9_]+' "$source_file" | head -1 | awk '{print $3}')"
+  if [[ -z "$detected" ]]; then
+    detected="$(grep -Eio 'DEFAULT[[:space:]]+CHARACTER[[:space:]]+SET[[:space:]]+[A-Za-z0-9_]+' "$source_file" | head -1 | awk '{print $4}')"
+  fi
+
+  if [[ -n "$detected" ]]; then
+    printf '%s\n' "$detected"
+  else
+    printf '%s\n' "$db_charset"
+  fi
+}
+
+extract_db_collation() {
+  local source_file="$1"
+  local detected=""
+
+  detected="$(grep -Eio 'COLLATE[[:space:]]+[A-Za-z0-9_]+' "$source_file" | head -1 | awk '{print $2}')"
+
+  if [[ -n "$detected" ]]; then
+    printf '%s\n' "$detected"
+  else
+    printf '%s\n' "$db_collation"
+  fi
+}
+
 rewrite_sql_for_database() {
   local source_file="$1"
   local target_db="$2"
   local target_file="$3"
+  local source_charset="$4"
+  local source_collation="$5"
 
-  awk -v db="$target_db" '
+  awk -v db="$target_db" -v charset="$source_charset" -v coll="$source_collation" '
   {
     if ($0 ~ /^[[:space:]]*DROP[[:space:]]+DATABASE[[:space:]]+IF[[:space:]]+EXISTS[[:space:]]+/) {
       print "DROP DATABASE IF EXISTS " db ";"
       next
     }
+    if ($0 ~ /^[[:space:]]*DROP[[:space:]]+SCHEMA[[:space:]]+IF[[:space:]]+EXISTS[[:space:]]+/) {
+      print "DROP DATABASE IF EXISTS " db ";"
+      next
+    }
     if ($0 ~ /^[[:space:]]*CREATE[[:space:]]+DATABASE[[:space:]]+/) {
-      print "CREATE DATABASE " db " CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;"
+      print "CREATE DATABASE " db " CHARACTER SET " charset " COLLATE " coll ";"
+      next
+    }
+    if ($0 ~ /^[[:space:]]*CREATE[[:space:]]+SCHEMA[[:space:]]+/) {
+      print "CREATE DATABASE " db " CHARACTER SET " charset " COLLATE " coll ";"
       next
     }
     if ($0 ~ /^[[:space:]]*USE[[:space:]]+/) {
@@ -153,14 +204,16 @@ for struct_sql in "$input_dir"/*_struktur_*.sql; do
   target_mwb="$input_dir/${system_name}_${year}.mwb"
   target_db_raw="${db_prefix}${system_name}_${year}"
   target_db="$(sanitize_identifier "$target_db_raw")"
+  target_charset="$(extract_db_charset "$struct_sql")"
+  target_collation="$(extract_db_collation "$struct_sql")"
 
   rewritten_struct="$tmp_dir/${system_name}_${year}_struktur.sql"
   rewritten_data="$tmp_dir/${system_name}_${year}_daten.sql"
 
-  rewrite_sql_for_database "$struct_sql" "$target_db" "$rewritten_struct"
-  rewrite_sql_for_database "$data_sql" "$target_db" "$rewritten_data"
+  rewrite_sql_for_database "$struct_sql" "$target_db" "$rewritten_struct" "$target_charset" "$target_collation"
+  rewrite_sql_for_database "$data_sql" "$target_db" "$rewritten_data" "$target_charset" "$target_collation"
 
-  echo "[prepare-mwb] Importiere: ${system_name} (${year}) -> DB ${target_db}"
+  echo "[prepare-mwb] Importiere: ${system_name} (${year}) -> DB ${target_db} [${target_charset}/${target_collation}]"
   docker compose exec -T mysql mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" < "$rewritten_struct"
   docker compose exec -T mysql mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" < "$rewritten_data"
 
@@ -169,7 +222,7 @@ for struct_sql in "$input_dir"/*_struktur_*.sql; do
     table_count="0"
   fi
 
-  entries+="$(printf '| %s | %s | %s | %s | %s | %s | %s |' "$system_name" "$year" "$target_db" "$table_count" "$struct_sql" "$data_sql" "$target_mwb")"
+  entries+="$(printf '| %s | %s | %s | %s | %s | %s | %s | %s | %s |' "$system_name" "$year" "$target_db" "$target_charset" "$target_collation" "$table_count" "$struct_sql" "$data_sql" "$target_mwb")"
   entries+=$'\n'
   processed=$((processed + 1))
 done
@@ -188,8 +241,8 @@ Diese Datei wurde automatisch erzeugt mit:
 
 ## 1) Vorbereitete Datenbankschemata
 
-| System | Jahr | Schema fuer Reverse Engineering | Tabellen | Struktur-SQL | Daten-SQL | Ziel-.mwb |
-|---|---:|---|---:|---|---|---|
+| System | Jahr | Schema fuer Reverse Engineering | Charset | Collation | Tabellen | Struktur-SQL | Daten-SQL | Ziel-.mwb |
+|---|---:|---|---|---|---:|---|---|---|
 ${entries}
 
 ## 2) Schritte in MySQL Workbench (pro System)

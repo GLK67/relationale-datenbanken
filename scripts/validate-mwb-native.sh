@@ -35,6 +35,16 @@ check_native_mwb() {
     return
   fi
 
+  if ! unzip -l "$file" | awk '{print $4}' | grep -qx "lock"; then
+    note_fail "Workbench-Archiv-Entry lock fehlt: $file"
+    return
+  fi
+
+  if ! unzip -l "$file" | awk '{print $4}' | grep -qx "@db/data.db"; then
+    note_fail "Workbench-Archiv-Entry @db/data.db fehlt: $file"
+    return
+  fi
+
   local doc_xml
   if ! doc_xml="$(unzip -p "$file" document.mwb.xml 2>/dev/null)"; then
     note_fail "document.mwb.xml kann nicht gelesen werden: $file"

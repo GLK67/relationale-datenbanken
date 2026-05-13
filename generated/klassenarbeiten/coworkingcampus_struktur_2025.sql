@@ -2,7 +2,7 @@
 -- Kompakter SQL-Kontext mit 6 Entitaetstypen
 
 DROP DATABASE IF EXISTS ka02_bg12_2025_sqlteil_v2;
-CREATE DATABASE ka02_bg12_2025_sqlteil_v2 CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE ka02_bg12_2025_sqlteil_v2 CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE ka02_bg12_2025_sqlteil_v2;
 
 DROP TABLE IF EXISTS zahlungen;
