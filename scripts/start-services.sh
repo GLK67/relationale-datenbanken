@@ -31,8 +31,20 @@ fi
 docker compose up -d --build
 
 echo "[start] Warte auf MySQL-Init und python-api..."
-sleep 5
 docker compose restart python-api >/dev/null 2>&1 || true
+
+python_port="${PYTHON_API_PORT:-8000}"
+for attempt in {1..30}; do
+  if curl -fsS "http://localhost:${python_port}/health" | grep -q '"ok":true'; then
+    break
+  fi
+  echo "[start] API noch nicht bereit (Versuch ${attempt}/30)"
+  if [[ "$attempt" == "30" ]]; then
+    echo "[start] Fehler: Python-API meldet MySQL noch nicht als bereit."
+    exit 1
+  fi
+  sleep 2
+done
 
 echo "[start] Dienste gestartet"
 echo "[start] PHP-Webapp:   http://localhost:${PHP_WEB_PORT:-8080}"

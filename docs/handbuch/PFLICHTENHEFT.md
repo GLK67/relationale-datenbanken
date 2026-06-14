@@ -56,6 +56,13 @@ Aufbau einer strukturierten, wiederverwendbaren Wissensdatenbank zur **Verwaltun
 - **FA5.3:** Redundanz-Analyse und Konsolidierungsprozesse
 - **FA5.4:** Performance-Metriken für Routinen
 
+#### FA6: Relationale-Datenbanken-Lernplattform
+- **FA6.1:** Lehrpläne werden getrennt in `uploads/lehrplaene/` verortet und als curriculare Primärquellen behandelt.
+- **FA6.2:** Die Webapp stellt didaktisch sinnvolle Lernpfade für EERM, 3. Normalform und SQL bereit.
+- **FA6.3:** Im Übungsbereich stehen Code-Inboxen, Infoboxen, Selbstkontrolle und konstruktive Lösungshinweise bereit.
+- **FA6.4:** Eine Docker-basierte Live-Testumgebung prüft PHP-Webapp, Python-API, MySQL und fachliche Beispieldaten reproduzierbar.
+- **FA6.5:** Die technische Dokumentation beschreibt Webserver-Voraussetzungen und Schritt-für-Schritt-Setups für Apache, MySQL, phpMyAdmin und MySQL Workbench.
+
 ### 2.2 Nicht-funktionale Anforderungen (NFA)
 
 #### NFA1: Qualität
@@ -183,6 +190,9 @@ Git Commit & Push
 - Marschpläne und Meilensteine
 - Versionskontrolle via Git
 - Redundanz-Management
+- Curriculare Lehrplanablage und lehrplangestützte Inhaltsentwicklung für relationale Datenbanken
+- Webapp mit selbstgesteuerten Lernpfaden und Selbstkontrolle
+- Docker-Testumgebung für relationale Datenbanken, EERM- und SQL-Lernszenarien
 
 ### 5.2 Out of Scope
 - Automatisierte Workflow-Engine (kann später folgen)

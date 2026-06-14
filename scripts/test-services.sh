@@ -25,10 +25,22 @@ require_cmd docker
 echo "[test] Pruefe Python-Health..."
 curl -fsS "http://localhost:${python_port}/health" >/tmp/python_health.json
 cat /tmp/python_health.json
+grep -q '"ok":true' /tmp/python_health.json || {
+  echo "[test] Fehler: Python-API meldet keine erfolgreiche MySQL-Verbindung"
+  exit 1
+}
 
 echo "[test] Pruefe Python-JSON..."
 curl -fsS "http://localhost:${python_port}/json-items" >/tmp/python_json.json
 cat /tmp/python_json.json
+
+echo "[test] Pruefe Lehrplan-API..."
+curl -fsS "http://localhost:${python_port}/curricula" >/tmp/curricula.json
+cat /tmp/curricula.json
+grep -q '"documents"' /tmp/curricula.json || {
+  echo "[test] Fehler: Lehrplan-API liefert keine Dokumentliste"
+  exit 1
+}
 
 echo "[test] Pruefe PHP-Webseite..."
 curl -fsS "http://localhost:${php_port}" >/tmp/php_index.html

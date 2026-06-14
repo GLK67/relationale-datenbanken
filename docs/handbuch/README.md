@@ -50,6 +50,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 
 ### 🧪 Live-Tests & Anleitungen
 - **[anleitungen/java-live-test.md](anleitungen/java-live-test.md)** - Java-App testen: Headless-Test im Codespace & GUI lokal starten
+- **[anleitungen/rdb-live-test-und-webserver-setup.md](anleitungen/rdb-live-test-und-webserver-setup.md)** - Docker-Testumgebung, Webserver-Voraussetzungen, Apache/MySQL/phpMyAdmin/Workbench-Setup fuer relationale Datenbanken
 
 ### 🔧 Grundlagen & Setup
 - **[PFLICHTENHEFT.md](PFLICHTENHEFT.md)** - Alles über das System & Anforderungen
@@ -58,6 +59,7 @@ ls routinen/langfristig/        # Jährlich/Strategisch
 
 ### 📋 Prozesse
 - **[prozesse/neue-routine-erstellen.md](prozesse/neue-routine-erstellen.md)** - Anleitung neue Routine
+- **[prozesse/lehrplanbasierte-inhaltserweiterung.md](prozesse/lehrplanbasierte-inhaltserweiterung.md)** - Curriculare Analyse, ML/RAG-Verfahren und Ableitung neuer Lernpfade, Aufgaben und Loesungen
 - **[prozesse/redundanz-management.md](prozesse/redundanz-management.md)** - Redundanzen eliminieren
 - **[prozesse/review-prozess.md](prozesse/review-prozess.md)** - Review & Genehmigung
 - **[prozesse/routine-aktualisieren.md](prozesse/routine-aktualisieren.md)** - Bestehende Routine ändern

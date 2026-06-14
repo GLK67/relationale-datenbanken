@@ -245,8 +245,10 @@ edu-code-course-rdb/
 └─ uploads/
    ├─ klassenarbeiten-und-unterrichtsmaterialien/
    │  └─ (Archiv 2022-2025)
+  ├─ lehrplaene/
+  │  └─ BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf
    └─ pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/
-      └─ BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf
+    └─ (Pruefungsaufgaben, Erwartungshorizonte, MWB-Referenzen)
 ```
 
 ---

@@ -16,9 +16,11 @@
 
 ### 🧪 Anleitungen & Live-Tests
 - **[anleitungen/java-live-test.md](anleitungen/java-live-test.md)** - Java-App kompilieren, Modell-Tests & GUI starten
+- **[anleitungen/rdb-live-test-und-webserver-setup.md](anleitungen/rdb-live-test-und-webserver-setup.md)** - Docker-Live-Test, Webserver-Voraussetzungen und Betriebsanleitung fuer relationale Datenbankinhalte
 
 ### 🔧 Prozesse & Governance
 - **[prozesse/neue-routine-erstellen.md](prozesse/neue-routine-erstellen.md)** - Schritt-für-Schritt Anleitung
+- **[prozesse/lehrplanbasierte-inhaltserweiterung.md](prozesse/lehrplanbasierte-inhaltserweiterung.md)** - Curriculare Inhaltsanalyse, didaktische Ableitung und ML/RAG-Workflow
 - **[prozesse/routine-aktualisieren.md](prozesse/routine-aktualisieren.md)** - Update & Wartung
 - **[prozesse/redundanz-management.md](prozesse/redundanz-management.md)** - Redundanzen finden & beheben
 - **[prozesse/review-prozess.md](prozesse/review-prozess.md)** - Quality Assurance
@@ -68,6 +70,8 @@
 1. Lese PFLICHTENHEFT (Anforderungen)
 2. Lese ARCHITEKTUR (Design)
 3. Lese MARSCHPLAN (Zeitplan)
+4. Lese anleitungen/rdb-live-test-und-webserver-setup.md (Betrieb)
+5. Lese prozesse/lehrplanbasierte-inhaltserweiterung.md (curriculare Weiterentwicklung)
 
 ### ...die aktuelle Phase sehen → [marschplaene/HAUPTMARSCHPLAN.md](marschplaene/HAUPTMARSCHPLAN.md)
 - Aktuelle Phase

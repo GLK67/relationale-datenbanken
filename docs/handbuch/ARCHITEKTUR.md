@@ -95,6 +95,16 @@ LANGFRISTIG (jährlich/strategisch)
   └── Jahresberichte
 ```
 
+### 2.4 RDB-Lernplattform und Teststack
+
+Fuer dieses Repository ist die fachliche Domäne strikt auf relationale Datenbanken begrenzt. Daraus ergibt sich ein technischer Kernstack mit klarer Verantwortungstrennung:
+
+- **Uploads:** `uploads/lehrplaene/` fuer curriculare Primärquellen, `uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/` fuer Prüfungsreferenzen und Analysegrundlagen, `uploads/klassenarbeiten-und-unterrichtsmaterialien/` fuer Archivmaterial.
+- **Webapp:** PHP-Frontend mit didaktischen Lernpfaden, Info-Boxen, Code-Inboxen und Selbstkontrolle.
+- **Python-API:** Zentrale Service-Schicht für strukturierte Datenlieferung und spätere Analyse-/Generierungsfunktionen.
+- **MySQL:** Ausführungs- und Testumgebung für 3NF-Strukturen, Abfragen, Referenzdaten und fachliche Validierung.
+- **Docker Compose:** Reproduzierbarer Live-Test für Schulen, Lehrkräfte und lokale Entwicklungsumgebungen.
+
 ---
 
 ## 3. Prozess-Schichten
@@ -177,12 +187,13 @@ Das System ist für folgende Erweiterungen ausgelegt:
 - [ ] Dashboards für Ziele/KPIs
 - [ ] Automatisierte Test-Routinen
 - [ ] Integration mit Projektmanagement-Tools
+- [ ] Curriculare Upload-Analyse fuer neue Lehrplaene und Ableitung neuer RDB-Lernpfade
 
 ### 5.3 Langfristig
 - [ ] Workflow-Automation (z.B. Automatische Erinnerungen)
 - [ ] Datenbank-Migrations-Pfad
 - [ ] API-Zugang zu Routinen
-- [ ] Machine-Learning für Optimierungen
+- [ ] Retrieval-gestuetzte Lehrplananalyse mit mehrsprachigen Embeddings und didaktischem Regelwerk
 - [ ] Intelligente Routine-Vorschläge
 
 ---

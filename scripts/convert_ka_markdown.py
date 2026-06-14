@@ -281,13 +281,57 @@ def _wrap_tables(html_content: str) -> str:
     # Tabellen in einen responsiven Container setzen, damit sie immer zur Seitenbreite passen.
     return re.sub(r"(?is)(<table\b.*?</table>)", r'<div class="table-wrap">\1</div>', html_content)
 
+
+def _embed_referenzmodell_png(html_content: str, html_file: str) -> str:
+    """Bettet die zugehörige PNG-Datei nach dem Referenzmodell-Absatz in Aufgabe 3.1 ein.
+
+    Erkennt ``<p><strong>Referenzmodell:</strong> <code>NAME.mwb</code></p>`` und
+    fügt danach ein ``<figure class="ka-figure">``-Block mit dem gleichnamigen PNG ein,
+    sofern die Datei im selben Verzeichnis existiert. Idempotent: überspringt die
+    Einbettung, wenn das PNG bereits unmittelbar danach referenziert ist.
+    """
+    pattern = re.compile(
+        r'(<p><strong>Referenzmodell:</strong>\s*<code>([^<]+\.mwb)</code></p>)',
+        re.IGNORECASE,
+    )
+    html_dir = Path(html_file).parent.resolve()
+    result: list[str] = []
+    last_end = 0
+
+    for match in pattern.finditer(html_content):
+        mwb_name = match.group(2).strip()
+        png_name = Path(mwb_name).stem + ".png"
+        png_path = html_dir / png_name
+
+        result.append(html_content[last_end : match.start()])
+        result.append(match.group(1))
+
+        # Idempotenz: nicht einfügen, wenn PNG direkt nach dem Absatz steht
+        lookahead = html_content[match.end() : match.end() + 300]
+        if png_name not in lookahead and png_path.exists():
+            rel_src = _to_rel_posix(html_dir, png_path)
+            alt = escape(Path(mwb_name).stem, quote=True)
+            result.append(
+                f'\n<figure class="ka-figure">'
+                f'<img alt="{alt}" src="{escape(rel_src, quote=True)}" />'
+                f"</figure>"
+            )
+            print(f"🖼️  Referenzmodell-PNG eingebettet: {png_name}")
+
+        last_end = match.end()
+
+    result.append(html_content[last_end:])
+    return "".join(result)
+
+
 def markdown_to_html(md_file, html_file):
     """Konvertiert Markdown zu HTML"""
     with open(md_file, 'r', encoding='utf-8') as f:
         md_content = f.read()
-    
+
     html_content = markdown.markdown(md_content, extensions=['tables', 'extra'])
     html_content = _embed_graphics(html_content, md_file)
+    html_content = _embed_referenzmodell_png(html_content, html_file)
     html_content = _ensure_table_fit_to_page_and_word(html_content)
     html_content = _wrap_tables(html_content)
     

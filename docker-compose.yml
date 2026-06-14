@@ -33,11 +33,14 @@ services:
       MYSQL_USER: ${MYSQL_USER:?MYSQL_USER must be set}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD must be set}
       JSON_DB_PATH: /app/data.json
+      CURRICULUM_INDEX_PATH: /app/generated/lehrplaene/index.json
     ports:
       - "${PYTHON_API_PORT:-8000}:8000"
     depends_on:
       mysql:
         condition: service_healthy
+    volumes:
+      - ./generated:/app/generated:ro
     networks:
       - appnet
 

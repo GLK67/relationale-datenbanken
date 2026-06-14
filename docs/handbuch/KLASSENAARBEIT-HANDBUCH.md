@@ -387,7 +387,7 @@ pandoc KA02_BG12_2024-2025_Muster_Online-Buecherverleih.html \
 
 ### Im Repository
 
-- **Lehrplan:** [uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf](../../uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf)
+- **Lehrplan:** [uploads/lehrplaene/BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf](../../uploads/lehrplaene/BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf)
 - **Operatorenliste Struktogramme:** [uploads/klassenarbeiten-und-unterrichtsmaterialien/operatorenliste-fuer-struktogramme-v2-2.pdf](../../uploads/klassenarbeiten-und-unterrichtsmaterialien/operatorenliste-fuer-struktogramme-v2-2.pdf)
 - **Klassenaarbeit-Archiv:** [uploads/klassenarbeiten-und-unterrichtsmaterialien/](../../uploads/klassenarbeiten-und-unterrichtsmaterialien/)
 

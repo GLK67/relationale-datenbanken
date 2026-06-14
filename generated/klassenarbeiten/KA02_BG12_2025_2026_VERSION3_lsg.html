@@ -210,6 +210,7 @@ fassung: loesung</p>
 - Kardinalitäten korrekt angegeben: 1 Pkt
 - Attributzuweisung, PK/FK korrekt: 2 Pkt</p>
 <p><strong>Referenzmodell:</strong> <code>startupwerkstatt_2025.mwb</code></p>
+<figure class="ka-figure"><img alt="startupwerkstatt_2025" src="startupwerkstatt_2025.png" /></figure>
 <h3>Aufgabe 3.2: Normalisierung bis 3NF – 4 Punkte</h3>
 <p><strong>Musterlösung (Beispiel):</strong>
 - <code>termin_id -&gt; mentor_id</code>
@@ -317,7 +318,55 @@ ENDE
 </code></pre>
 <p><strong>Struktogramm (BW-Standard, generiert):</strong></p>
 <p><figure class="ka-figure" aria-label="Struktogramm Version 3 Teil D">
-<img alt="Struktogramm Version 3 Teil D" src="svg/KA02_VERSION3_TeilD.png" />
+<svg xmlns="http://www.w3.org/2000/svg" 
+     width="700" 
+     height="310" 
+     viewBox="0 0 700 310">
+  
+  <style>
+    .box { stroke: #000; stroke-width: 2; fill: #fff; }
+    .text { font-family: Arial, sans-serif; font-size: 13px; fill: #000; }
+    .label { font-size: 11px; fill: #666; }
+    .bold { font-weight: bold; }
+  </style>
+  
+  <!-- Titel -->
+  <text x="350" y="30" class="text bold" text-anchor="middle" font-size="16">FoodtruckNetz: Tagesumsatz berechnen</text>
+  <line x1="30" y1="50" x2="670" y2="50" stroke="#000" stroke-width="1"/>
+  
+  <!-- EINGABE -->
+  <rect x="50" y="80" width="600" height="50" class="box"/>
+  
+  <!-- Bezeichnung -->
+  <text x="60" y="98" class="text label">Einlesen:</text>
+  
+  <!-- Text -->
+  <text x="60" y="115" class="text">anzahl</text>
+  <!-- EINGABE -->
+  <rect x="50" y="130" width="600" height="50" class="box"/>
+  
+  <!-- Bezeichnung -->
+  <text x="60" y="148" class="text label">Einlesen:</text>
+  
+  <!-- Text -->
+  <text x="60" y="165" class="text">preis</text>
+  <!-- PROZESS -->
+  <rect x="50" y="180" width="600" height="50" class="box"/>
+  
+  <!-- Bezeichnung -->
+  <text x="60" y="198" class="text label">Zuweisung:</text>
+  
+  <!-- Text -->
+  <text x="60" y="215" class="text">tagesumsatz = anzahl * preis</text>
+  <!-- AUSGABE -->
+  <rect x="50" y="230" width="600" height="50" class="box"/>
+  
+  <!-- Bezeichnung -->
+  <text x="60" y="248" class="text label">Ausgabe:</text>
+  
+  <!-- Text -->
+  <text x="60" y="265" class="text">tagesumsatz</text>
+</svg>
 </figure></p>
 <p><strong>Bewertungshinweise:</strong>
 - 1,0 Pkt: ANFANG/ENDE vorhanden, 4 Sequenzblöcke sauber abgegrenzt (je 0,25 Pkt)
