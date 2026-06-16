@@ -7,3 +7,4 @@ Empfohlener Unterordner:
 
 Weitere Lernmaterialien:
 - `informationen/README.md`
+- `uebungen/README.md`
