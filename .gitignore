@@ -10,3 +10,6 @@ uploads/lehrplaene/*
 !uploads/lehrplaene/.gitkeep
 uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/*
 !uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/.gitkeep
+
+# Lokale Loesungsablaeufe: nicht versionieren und nicht in Templates uebernehmen
+src/ka_loesungen/
