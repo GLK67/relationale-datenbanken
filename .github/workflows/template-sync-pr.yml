@@ -2,7 +2,7 @@ name: template-sync-pr
 
 on:
   schedule:
-    - cron: "0 5 * * 1"
+    - cron: "0 5 * * *"
   workflow_dispatch:
 
 permissions:
@@ -59,27 +59,36 @@ jobs:
           echo "has_changes=true" >> "$GITHUB_OUTPUT"
           echo "has_conflict=false" >> "$GITHUB_OUTPUT"
 
-      - name: Create sync pull request
+          git commit -m "chore: sync upstream main"
+
+      - name: Push merged changes to main
         if: steps.merge.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: chore/sync-upstream-main
-          delete-branch: false
-          title: "chore: sync upstream main"
-          body: |
-            ## Automatischer Upstream-Sync
+        id: push-main
+        continue-on-error: true
+        run: |
+          set -euo pipefail
 
-            Dieser Pull Request wurde automatisch erstellt, um Änderungen aus dem Upstream-Repository zu übernehmen.
+          git push origin HEAD:main
 
-            ### Quelle
-            - Upstream-Branch: `main`
-            - Workflow: `template-sync-pr`
+      - name: Push sync branch for pull request fallback
+        if: steps.merge.outputs.has_changes == 'true' && steps.push-main.outcome != 'success'
+        run: |
+          set -euo pipefail
 
-            ### Hinweise
-            - Bitte die Änderungen kurz prüfen und anschließend mergen.
-            - Bei Konflikten den Workflow manuell starten und Konflikte lokal lösen.
-          commit-message: "chore: sync upstream main"
-          signoff: true
+          git push origin HEAD:chore/sync-upstream-main
+
+      - name: Create sync pull request
+        if: steps.merge.outputs.has_changes == 'true' && steps.push-main.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          gh pr create \
+            --base main \
+            --head chore/sync-upstream-main \
+            --title "chore: sync upstream main" \
+            --body "## Automatischer Upstream-Sync\n\nDieser Pull Request wurde automatisch erstellt, weil ein direkter Push auf 'main' durch Branch-Schutzregeln verhindert wurde.\n\n### Quelle\n- Upstream-Branch: main\n- Workflow: template-sync-pr\n\n### Hinweise\n- Bitte die Änderungen kurz prüfen und anschließend mergen.\n- Bei Konflikten den Workflow manuell starten und Konflikte lokal lösen."
 
       - name: Conflict hint
         if: failure()
